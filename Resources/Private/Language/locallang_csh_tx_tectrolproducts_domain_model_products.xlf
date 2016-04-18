@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-04-01T15:29:32Z" product-name="tectrolproducts">
+		<header/>
+		<body>
+			<trans-unit id="title.description">
+				<source>title</source>
+			</trans-unit>
+			<trans-unit id="description.description">
+				<source>description</source>
+			</trans-unit>
+			<trans-unit id="viskovg.description">
+				<source>viskovg</source>
+			</trans-unit>
+			<trans-unit id="viskoj300.description">
+				<source>viskoj300</source>
+			</trans-unit>
+			<trans-unit id="viskoj306.description">
+				<source>viskoj306</source>
+			</trans-unit>
+			<trans-unit id="nlgi.description">
+				<source>nlgi</source>
+			</trans-unit>
+			<trans-unit id="anwendungsempfehlung.description">
+				<source>anwendungsempfehlung</source>
+			</trans-unit>
+			<trans-unit id="freigaben.description">
+				<source>freigaben</source>
+			</trans-unit>
+			<trans-unit id="spezifikation.description">
+				<source>spezifikation</source>
+			</trans-unit>
+			<trans-unit id="typeimage.description">
+				<source>typeimage</source>
+			</trans-unit>
+			<trans-unit id="packages.description">
+				<source>packages</source>
+			</trans-unit>
+			<trans-unit id="category.description">
+				<source>category</source>
+			</trans-unit>
+			<trans-unit id="targetgroups.description">
+				<source>targetgroups</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-04-01T15:29:32Z" product-name="tectrolproducts">
+		<header/>
+		<body>
+			<trans-unit id="tx_tectrolproducts_domain_model_products">
+				<source>Products</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_products.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_products.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_products.viskovg">
+				<source>Viskovg</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_products.viskoj300">
+				<source>Viskoj300</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_products.viskoj306">
+				<source>Viskoj306</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_products.nlgi">
+				<source>Nlgi</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_products.anwendungsempfehlung">
+				<source>Anwendungsempfehlung</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_products.freigaben">
+				<source>Freigaben</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_products.spezifikation">
+				<source>Spezifikation</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_products.typeimage">
+				<source>Typeimage</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_products.packages">
+				<source>Packages</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_products.category">
+				<source>Category</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_products.targetgroups">
+				<source>Targetgroups</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_productpackages">
+				<source>Productpackages</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_productpackages.size">
+				<source>Size</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_productpackages.unit">
+				<source>Unit</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_productpackages.image">
+				<source>Image</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_categories">
+				<source>Categories</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_categories.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_categories.titleoverride">
+				<source>Titleoverride</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_categories.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_categories.catimage">
+				<source>Catimage</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_categories.parentid">
+				<source>Parentid</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_categories.parentidoverride">
+				<source>Parentidoverride</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_categories.orderoverride">
+				<source>Orderoverride</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_targetgroups">
+				<source>Targetgroups</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_targetgroups.title">
+				<source>Title</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
