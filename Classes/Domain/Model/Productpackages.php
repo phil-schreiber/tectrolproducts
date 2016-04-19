@@ -1,5 +1,6 @@
 <?php
-namespace TectrolProducts\Tectrolproducts\Domain\Model;
+namespace Df\Tectrolproducts\Domain\Model;
+
 
 /***************************************************************
  *
@@ -34,51 +35,30 @@ class Productpackages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * size
-     *
+     * 
      * @var float
      * @validate NotEmpty
      */
-    protected $size = '';
+    protected $size = 0.0;
     
     /**
      * unit
-     *
+     * 
      * @var string
      */
     protected $unit = '';
     
     /**
      * image
-     *
+     * 
      * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
      */
     protected $image = null;
     
     /**
-     * Returns the image
-     *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-    
-    /**
-     * Sets the image
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
-     * @return void
-     */
-    public function setImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
-    {
-        $this->image = $image;
-    }
-    
-    /**
      * Returns the size
-     *
-     * @return float size
+     * 
+     * @return float $size
      */
     public function getSize()
     {
@@ -87,8 +67,8 @@ class Productpackages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the size
-     *
-     * @param string $size
+     * 
+     * @param float $size
      * @return void
      */
     public function setSize($size)
@@ -98,7 +78,7 @@ class Productpackages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Returns the unit
-     *
+     * 
      * @return string $unit
      */
     public function getUnit()
@@ -108,13 +88,34 @@ class Productpackages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the unit
-     *
+     * 
      * @param string $unit
      * @return void
      */
     public function setUnit($unit)
     {
         $this->unit = $unit;
+    }
+    
+    /**
+     * Returns the image
+     * 
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+    
+    /**
+     * Sets the image
+     * 
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
+     * @return void
+     */
+    public function setImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
+    {
+        $this->image = $image;
     }
 
 }

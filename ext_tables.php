@@ -4,9 +4,15 @@ if (!defined('TYPO3_MODE')) {
 }
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-	'TectrolProducts.' . $_EXTKEY,
-	'Tectrolproducts',
+	'Df.' . $_EXTKEY,
+	'Products',
 	'TECTROL Products'
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+	'Df.' . $_EXTKEY,
+	'Catfilter',
+	'TECTROL Catfilter'
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'TECTROL Products');

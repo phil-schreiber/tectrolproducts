@@ -4,15 +4,31 @@ if (!defined('TYPO3_MODE')) {
 }
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	'TectrolProducts.' . $_EXTKEY,
-	'Tectrolproducts',
+	'Df.' . $_EXTKEY,
+	'Products',
 	array(
-		'Products' => 'list, show',
+		'Products' => 'list, show',		
 		
 	),
 	// non-cacheable actions
 	array(
 		'Products' => '',
+		'Categories' => '',
+		
+	)
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Df.' . $_EXTKEY,
+	'Catfilter',
+	array(
+		'Categories' => 'list',		
+		
+	),
+	// non-cacheable actions
+	array(
+		'Products' => '',
+		'Categories' => '',
 		
 	)
 );

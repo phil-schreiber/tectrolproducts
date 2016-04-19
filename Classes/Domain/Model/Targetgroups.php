@@ -1,5 +1,6 @@
 <?php
-namespace TectrolProducts\Tectrolproducts\Domain\Model;
+namespace Df\Tectrolproducts\Domain\Model;
+
 
 /***************************************************************
  *
@@ -34,7 +35,7 @@ class Targetgroups extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * title
-     *
+     * 
      * @var string
      * @validate NotEmpty
      */
@@ -42,7 +43,7 @@ class Targetgroups extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Returns the title
-     *
+     * 
      * @return string $title
      */
     public function getTitle()
@@ -52,7 +53,7 @@ class Targetgroups extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the title
-     *
+     * 
      * @param string $title
      * @return void
      */

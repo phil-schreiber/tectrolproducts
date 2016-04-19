@@ -1,6 +1,6 @@
 <?php
 
-namespace TectrolProducts\Tectrolproducts\Tests\Unit\Domain\Model;
+namespace Df\Tectrolproducts\Tests\Unit\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -27,7 +27,7 @@ namespace TectrolProducts\Tectrolproducts\Tests\Unit\Domain\Model;
  ***************************************************************/
 
 /**
- * Test case for class \TectrolProducts\Tectrolproducts\Domain\Model\Products.
+ * Test case for class \Df\Tectrolproducts\Domain\Model\Products.
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
@@ -36,13 +36,13 @@ namespace TectrolProducts\Tectrolproducts\Tests\Unit\Domain\Model;
 class ProductsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
 	/**
-	 * @var \TectrolProducts\Tectrolproducts\Domain\Model\Products
+	 * @var \Df\Tectrolproducts\Domain\Model\Products
 	 */
 	protected $subject = NULL;
 
 	public function setUp()
 	{
-		$this->subject = new \TectrolProducts\Tectrolproducts\Domain\Model\Products();
+		$this->subject = new \Df\Tectrolproducts\Domain\Model\Products();
 	}
 
 	public function tearDown()
@@ -318,7 +318,7 @@ class ProductsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	 */
 	public function setPackagesForObjectStorageContainingProductpackagesSetsPackages()
 	{
-		$package = new \TectrolProducts\Tectrolproducts\Domain\Model\Productpackages();
+		$package = new \Df\Tectrolproducts\Domain\Model\Productpackages();
 		$objectStorageHoldingExactlyOnePackages = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOnePackages->attach($package);
 		$this->subject->setPackages($objectStorageHoldingExactlyOnePackages);
@@ -335,7 +335,7 @@ class ProductsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	 */
 	public function addPackageToObjectStorageHoldingPackages()
 	{
-		$package = new \TectrolProducts\Tectrolproducts\Domain\Model\Productpackages();
+		$package = new \Df\Tectrolproducts\Domain\Model\Productpackages();
 		$packagesObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'), array(), '', FALSE);
 		$packagesObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($package));
 		$this->inject($this->subject, 'packages', $packagesObjectStorageMock);
@@ -348,7 +348,7 @@ class ProductsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	 */
 	public function removePackageFromObjectStorageHoldingPackages()
 	{
-		$package = new \TectrolProducts\Tectrolproducts\Domain\Model\Productpackages();
+		$package = new \Df\Tectrolproducts\Domain\Model\Productpackages();
 		$packagesObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'), array(), '', FALSE);
 		$packagesObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($package));
 		$this->inject($this->subject, 'packages', $packagesObjectStorageMock);
@@ -373,7 +373,7 @@ class ProductsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	 */
 	public function setCategoryForCategoriesSetsCategory()
 	{
-		$categoryFixture = new \TectrolProducts\Tectrolproducts\Domain\Model\Categories();
+		$categoryFixture = new \Df\Tectrolproducts\Domain\Model\Categories();
 		$this->subject->setCategory($categoryFixture);
 
 		$this->assertAttributeEquals(
@@ -400,7 +400,7 @@ class ProductsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	 */
 	public function setTargetgroupsForObjectStorageContainingTargetgroupsSetsTargetgroups()
 	{
-		$targetgroup = new \TectrolProducts\Tectrolproducts\Domain\Model\Targetgroups();
+		$targetgroup = new \Df\Tectrolproducts\Domain\Model\Targetgroups();
 		$objectStorageHoldingExactlyOneTargetgroups = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOneTargetgroups->attach($targetgroup);
 		$this->subject->setTargetgroups($objectStorageHoldingExactlyOneTargetgroups);
@@ -417,7 +417,7 @@ class ProductsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	 */
 	public function addTargetgroupToObjectStorageHoldingTargetgroups()
 	{
-		$targetgroup = new \TectrolProducts\Tectrolproducts\Domain\Model\Targetgroups();
+		$targetgroup = new \Df\Tectrolproducts\Domain\Model\Targetgroups();
 		$targetgroupsObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'), array(), '', FALSE);
 		$targetgroupsObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($targetgroup));
 		$this->inject($this->subject, 'targetgroups', $targetgroupsObjectStorageMock);
@@ -430,7 +430,7 @@ class ProductsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	 */
 	public function removeTargetgroupFromObjectStorageHoldingTargetgroups()
 	{
-		$targetgroup = new \TectrolProducts\Tectrolproducts\Domain\Model\Targetgroups();
+		$targetgroup = new \Df\Tectrolproducts\Domain\Model\Targetgroups();
 		$targetgroupsObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'), array(), '', FALSE);
 		$targetgroupsObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($targetgroup));
 		$this->inject($this->subject, 'targetgroups', $targetgroupsObjectStorageMock);

@@ -1,5 +1,5 @@
 <?php
-namespace TectrolProducts\Tectrolproducts\Tests\Unit\Controller;
+namespace Df\Tectrolproducts\Tests\Unit\Controller;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,20 +24,20 @@ namespace TectrolProducts\Tectrolproducts\Tests\Unit\Controller;
  ***************************************************************/
 
 /**
- * Test case for class TectrolProducts\Tectrolproducts\Controller\ProductsController.
+ * Test case for class Df\Tectrolproducts\Controller\ProductsController.
  *
  */
 class ProductsControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
 
 	/**
-	 * @var \TectrolProducts\Tectrolproducts\Controller\ProductsController
+	 * @var \Df\Tectrolproducts\Controller\ProductsController
 	 */
 	protected $subject = NULL;
 
 	public function setUp()
 	{
-		$this->subject = $this->getMock('TectrolProducts\\Tectrolproducts\\Controller\\ProductsController', array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
+		$this->subject = $this->getMock('Df\\Tectrolproducts\\Controller\\ProductsController', array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
 	}
 
 	public function tearDown()
@@ -53,7 +53,7 @@ class ProductsControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
 		$allProductss = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 
-		$productsRepository = $this->getMock('', array('findAll'), array(), '', FALSE);
+		$productsRepository = $this->getMock('Df\\Tectrolproducts\\Domain\\Repository\\ProductsRepository', array('findAll'), array(), '', FALSE);
 		$productsRepository->expects($this->once())->method('findAll')->will($this->returnValue($allProductss));
 		$this->inject($this->subject, 'productsRepository', $productsRepository);
 
@@ -69,7 +69,7 @@ class ProductsControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	 */
 	public function showActionAssignsTheGivenProductsToView()
 	{
-		$products = new \TectrolProducts\Tectrolproducts\Domain\Model\Products();
+		$products = new \Df\Tectrolproducts\Domain\Model\Products();
 
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$this->inject($this->subject, 'view', $view);

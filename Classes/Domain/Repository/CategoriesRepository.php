@@ -1,5 +1,5 @@
 <?php
-namespace Df\Tectrolproducts\Controller;
+namespace Df\Tectrolproducts\Domain\Repository;
 
 
 /***************************************************************
@@ -28,42 +28,10 @@ namespace Df\Tectrolproducts\Controller;
  ***************************************************************/
 
 /**
- * ProductsController
+ * The repository for Categories
  */
-class ProductsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class CategoriesRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
 
-    /**
-     * productsRepository
-     * 
-     * @var \Df\Tectrolproducts\Domain\Repository\ProductsRepository
-     * @inject
-     */
-    protected $productsRepository = NULL;
     
-    /**
-     * action list
-     * 
-     * @return void
-     */
-    public function listAction()
-    {
-        
-        $products = $this->productsRepository->findAll();
-        
-        
-        $this->view->assign('productss', $products);
-    }
-    
-    /**
-     * action show
-     * 
-     * @param \Df\Tectrolproducts\Domain\Model\Products $products
-     * @return void
-     */
-    public function showAction(\Df\Tectrolproducts\Domain\Model\Products $products)
-    {
-        $this->view->assign('products', $products);
-    }
-
 }

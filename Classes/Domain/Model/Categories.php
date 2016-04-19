@@ -1,5 +1,6 @@
 <?php
-namespace TectrolProducts\Tectrolproducts\Domain\Model;
+namespace Df\Tectrolproducts\Domain\Model;
+
 
 /***************************************************************
  *
@@ -34,7 +35,7 @@ class Categories extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * title
-     *
+     * 
      * @var string
      * @validate NotEmpty
      */
@@ -42,28 +43,28 @@ class Categories extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * titleoverride
-     *
+     * 
      * @var string
      */
     protected $titleoverride = '';
     
     /**
      * description
-     *
+     * 
      * @var string
      */
     protected $description = '';
     
     /**
      * catimage
-     *
+     * 
      * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
      */
     protected $catimage = null;
     
     /**
      * parentid
-     *
+     * 
      * @var int
      * @validate NotEmpty
      */
@@ -71,7 +72,7 @@ class Categories extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * parentidoverride
-     *
+     * 
      * @var int
      * @validate NotEmpty
      */
@@ -79,7 +80,7 @@ class Categories extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * orderoverride
-     *
+     * 
      * @var int
      * @validate NotEmpty
      */
@@ -87,7 +88,7 @@ class Categories extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Returns the title
-     *
+     * 
      * @return string $title
      */
     public function getTitle()
@@ -97,7 +98,7 @@ class Categories extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the title
-     *
+     * 
      * @param string $title
      * @return void
      */
@@ -108,7 +109,7 @@ class Categories extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Returns the titleoverride
-     *
+     * 
      * @return string $titleoverride
      */
     public function getTitleoverride()
@@ -118,7 +119,7 @@ class Categories extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the titleoverride
-     *
+     * 
      * @param string $titleoverride
      * @return void
      */
@@ -129,7 +130,7 @@ class Categories extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Returns the description
-     *
+     * 
      * @return string $description
      */
     public function getDescription()
@@ -139,7 +140,7 @@ class Categories extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the description
-     *
+     * 
      * @param string $description
      * @return void
      */
@@ -150,7 +151,7 @@ class Categories extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Returns the catimage
-     *
+     * 
      * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $catimage
      */
     public function getCatimage()
@@ -160,7 +161,7 @@ class Categories extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the catimage
-     *
+     * 
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $catimage
      * @return void
      */
@@ -171,7 +172,7 @@ class Categories extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Returns the parentid
-     *
+     * 
      * @return int $parentid
      */
     public function getParentid()
@@ -181,7 +182,7 @@ class Categories extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the parentid
-     *
+     * 
      * @param int $parentid
      * @return void
      */
@@ -192,7 +193,7 @@ class Categories extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Returns the parentidoverride
-     *
+     * 
      * @return int $parentidoverride
      */
     public function getParentidoverride()
@@ -202,7 +203,7 @@ class Categories extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the parentidoverride
-     *
+     * 
      * @param int $parentidoverride
      * @return void
      */
@@ -213,7 +214,7 @@ class Categories extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Returns the orderoverride
-     *
+     * 
      * @return int $orderoverride
      */
     public function getOrderoverride()
@@ -223,7 +224,7 @@ class Categories extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the orderoverride
-     *
+     * 
      * @param int $orderoverride
      * @return void
      */

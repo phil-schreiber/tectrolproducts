@@ -1,5 +1,6 @@
 <?php
-namespace TectrolProducts\Tectrolproducts\Domain\Model;
+namespace Df\Tectrolproducts\Domain\Model;
+
 
 /***************************************************************
  *
@@ -34,7 +35,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * title
-     *
+     * 
      * @var string
      * @validate NotEmpty
      */
@@ -42,7 +43,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * description
-     *
+     * 
      * @var string
      * @validate NotEmpty
      */
@@ -50,79 +51,79 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * viskovg
-     *
+     * 
      * @var string
      */
     protected $viskovg = '';
     
     /**
      * viskoj300
-     *
+     * 
      * @var string
      */
     protected $viskoj300 = '';
     
     /**
      * viskoj306
-     *
+     * 
      * @var string
      */
     protected $viskoj306 = '';
     
     /**
      * nlgi
-     *
+     * 
      * @var string
      */
     protected $nlgi = '';
     
     /**
      * anwendungsempfehlung
-     *
+     * 
      * @var string
      */
     protected $anwendungsempfehlung = '';
     
     /**
      * freigaben
-     *
+     * 
      * @var string
      */
     protected $freigaben = '';
     
     /**
      * spezifikation
-     *
+     * 
      * @var string
      */
     protected $spezifikation = '';
     
     /**
      * typeimage
-     *
+     * 
      * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
      */
     protected $typeimage = null;
     
     /**
      * packages
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TectrolProducts\Tectrolproducts\Domain\Model\Productpackages>
+     * 
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Df\Tectrolproducts\Domain\Model\Productpackages>
      * @cascade remove
      */
     protected $packages = null;
     
     /**
      * category
-     *
-     * @var \TectrolProducts\Tectrolproducts\Domain\Model\Categories
+     * 
+     * @var \Df\Tectrolproducts\Domain\Model\Categories
      */
     protected $category = null;
     
     /**
      * targetgroups
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TectrolProducts\Tectrolproducts\Domain\Model\Targetgroups>
+     * 
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Df\Tectrolproducts\Domain\Model\Targetgroups>
      * @cascade remove
      */
     protected $targetgroups = null;
@@ -141,7 +142,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Do not modify this method!
      * It will be rewritten on each save in the extension builder
      * You may modify the constructor of this class instead
-     *
+     * 
      * @return void
      */
     protected function initStorageObjects()
@@ -152,7 +153,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Returns the title
-     *
+     * 
      * @return string $title
      */
     public function getTitle()
@@ -162,7 +163,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the title
-     *
+     * 
      * @param string $title
      * @return void
      */
@@ -173,7 +174,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Returns the description
-     *
+     * 
      * @return string $description
      */
     public function getDescription()
@@ -183,7 +184,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the description
-     *
+     * 
      * @param string $description
      * @return void
      */
@@ -194,7 +195,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Returns the viskovg
-     *
+     * 
      * @return string $viskovg
      */
     public function getViskovg()
@@ -204,7 +205,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the viskovg
-     *
+     * 
      * @param string $viskovg
      * @return void
      */
@@ -215,7 +216,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Returns the viskoj300
-     *
+     * 
      * @return string $viskoj300
      */
     public function getViskoj300()
@@ -225,7 +226,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the viskoj300
-     *
+     * 
      * @param string $viskoj300
      * @return void
      */
@@ -236,7 +237,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Returns the viskoj306
-     *
+     * 
      * @return string $viskoj306
      */
     public function getViskoj306()
@@ -246,7 +247,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the viskoj306
-     *
+     * 
      * @param string $viskoj306
      * @return void
      */
@@ -257,7 +258,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Returns the nlgi
-     *
+     * 
      * @return string $nlgi
      */
     public function getNlgi()
@@ -267,7 +268,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the nlgi
-     *
+     * 
      * @param string $nlgi
      * @return void
      */
@@ -278,7 +279,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Returns the anwendungsempfehlung
-     *
+     * 
      * @return string $anwendungsempfehlung
      */
     public function getAnwendungsempfehlung()
@@ -288,7 +289,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the anwendungsempfehlung
-     *
+     * 
      * @param string $anwendungsempfehlung
      * @return void
      */
@@ -299,7 +300,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Returns the freigaben
-     *
+     * 
      * @return string $freigaben
      */
     public function getFreigaben()
@@ -309,7 +310,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the freigaben
-     *
+     * 
      * @param string $freigaben
      * @return void
      */
@@ -320,7 +321,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Returns the spezifikation
-     *
+     * 
      * @return string $spezifikation
      */
     public function getSpezifikation()
@@ -330,7 +331,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the spezifikation
-     *
+     * 
      * @param string $spezifikation
      * @return void
      */
@@ -341,7 +342,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Returns the typeimage
-     *
+     * 
      * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $typeimage
      */
     public function getTypeimage()
@@ -351,7 +352,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the typeimage
-     *
+     * 
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $typeimage
      * @return void
      */
@@ -362,30 +363,30 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Adds a Productpackages
-     *
-     * @param \TectrolProducts\Tectrolproducts\Domain\Model\Productpackages $package
+     * 
+     * @param \Df\Tectrolproducts\Domain\Model\Productpackages $package
      * @return void
      */
-    public function addPackage(\TectrolProducts\Tectrolproducts\Domain\Model\Productpackages $package)
+    public function addPackage(\Df\Tectrolproducts\Domain\Model\Productpackages $package)
     {
         $this->packages->attach($package);
     }
     
     /**
      * Removes a Productpackages
-     *
-     * @param \TectrolProducts\Tectrolproducts\Domain\Model\Productpackages $packageToRemove The Productpackages to be removed
+     * 
+     * @param \Df\Tectrolproducts\Domain\Model\Productpackages $packageToRemove The Productpackages to be removed
      * @return void
      */
-    public function removePackage(\TectrolProducts\Tectrolproducts\Domain\Model\Productpackages $packageToRemove)
+    public function removePackage(\Df\Tectrolproducts\Domain\Model\Productpackages $packageToRemove)
     {
         $this->packages->detach($packageToRemove);
     }
     
     /**
      * Returns the packages
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TectrolProducts\Tectrolproducts\Domain\Model\Productpackages> $packages
+     * 
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Df\Tectrolproducts\Domain\Model\Productpackages> $packages
      */
     public function getPackages()
     {
@@ -394,8 +395,8 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the packages
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TectrolProducts\Tectrolproducts\Domain\Model\Productpackages> $packages
+     * 
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Df\Tectrolproducts\Domain\Model\Productpackages> $packages
      * @return void
      */
     public function setPackages(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $packages)
@@ -405,8 +406,8 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Returns the category
-     *
-     * @return \TectrolProducts\Tectrolproducts\Domain\Model\Categories $category
+     * 
+     * @return \Df\Tectrolproducts\Domain\Model\Categories $category
      */
     public function getCategory()
     {
@@ -415,41 +416,41 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the category
-     *
-     * @param \TectrolProducts\Tectrolproducts\Domain\Model\Categories $category
+     * 
+     * @param \Df\Tectrolproducts\Domain\Model\Categories $category
      * @return void
      */
-    public function setCategory(\TectrolProducts\Tectrolproducts\Domain\Model\Categories $category)
+    public function setCategory(\Df\Tectrolproducts\Domain\Model\Categories $category)
     {
         $this->category = $category;
     }
     
     /**
      * Adds a Targetgroups
-     *
-     * @param \TectrolProducts\Tectrolproducts\Domain\Model\Targetgroups $targetgroup
+     * 
+     * @param \Df\Tectrolproducts\Domain\Model\Targetgroups $targetgroup
      * @return void
      */
-    public function addTargetgroup(\TectrolProducts\Tectrolproducts\Domain\Model\Targetgroups $targetgroup)
+    public function addTargetgroup(\Df\Tectrolproducts\Domain\Model\Targetgroups $targetgroup)
     {
         $this->targetgroups->attach($targetgroup);
     }
     
     /**
      * Removes a Targetgroups
-     *
-     * @param \TectrolProducts\Tectrolproducts\Domain\Model\Targetgroups $targetgroupToRemove The Targetgroups to be removed
+     * 
+     * @param \Df\Tectrolproducts\Domain\Model\Targetgroups $targetgroupToRemove The Targetgroups to be removed
      * @return void
      */
-    public function removeTargetgroup(\TectrolProducts\Tectrolproducts\Domain\Model\Targetgroups $targetgroupToRemove)
+    public function removeTargetgroup(\Df\Tectrolproducts\Domain\Model\Targetgroups $targetgroupToRemove)
     {
         $this->targetgroups->detach($targetgroupToRemove);
     }
     
     /**
      * Returns the targetgroups
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TectrolProducts\Tectrolproducts\Domain\Model\Targetgroups> $targetgroups
+     * 
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Df\Tectrolproducts\Domain\Model\Targetgroups> $targetgroups
      */
     public function getTargetgroups()
     {
@@ -458,8 +459,8 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the targetgroups
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TectrolProducts\Tectrolproducts\Domain\Model\Targetgroups> $targetgroups
+     * 
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Df\Tectrolproducts\Domain\Model\Targetgroups> $targetgroups
      * @return void
      */
     public function setTargetgroups(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $targetgroups)

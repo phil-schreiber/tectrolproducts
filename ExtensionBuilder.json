@@ -22,7 +22,7 @@
                     "addDeletedField": true,
                     "addHiddenField": true,
                     "addStarttimeEndtimeFields": true,
-                    "aggregateRoot": false,
+                    "aggregateRoot": true,
                     "categorizable": false,
                     "description": "",
                     "mapToTable": "",
@@ -251,7 +251,7 @@
             "name": "New Model Object",
             "value": {
                 "actionGroup": {
-                    "_default0_list": false,
+                    "_default0_list": true,
                     "_default1_show": false,
                     "_default2_new_create": false,
                     "_default3_edit_update": false,
@@ -263,7 +263,7 @@
                     "addDeletedField": true,
                     "addHiddenField": true,
                     "addStarttimeEndtimeFields": true,
-                    "aggregateRoot": false,
+                    "aggregateRoot": true,
                     "categorizable": false,
                     "description": "",
                     "mapToTable": "",
@@ -425,7 +425,7 @@
         "plugins": [
             {
                 "actions": {
-                    "controllerActionCombinations": "",
+                    "controllerActionCombinations": "ProductsController => list,show\nCategoriesController => list",
                     "noncacheableActions": "",
                     "switchableActions": ""
                 },
@@ -433,7 +433,7 @@
                 "name": "TECTROL Products"
             }
         ],
-        "vendorName": "TectrolProducts"
+        "vendorName": "Df"
     },
     "wires": [
         {
@@ -474,7 +474,7 @@
         }
     ],
     "log": {
-        "last_modified": "2016-04-01 03:29",
+        "last_modified": "2016-04-19 11:35",
         "extension_builder_version": "7.6.0",
         "be_user": " (1)"
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace TectrolProducts\Tectrolproducts\Tests\Unit\Domain\Model;
+namespace Df\Tectrolproducts\Tests\Unit\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -27,7 +27,7 @@ namespace TectrolProducts\Tectrolproducts\Tests\Unit\Domain\Model;
  ***************************************************************/
 
 /**
- * Test case for class \TectrolProducts\Tectrolproducts\Domain\Model\Targetgroups.
+ * Test case for class \Df\Tectrolproducts\Domain\Model\Targetgroups.
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
@@ -36,13 +36,13 @@ namespace TectrolProducts\Tectrolproducts\Tests\Unit\Domain\Model;
 class TargetgroupsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
 	/**
-	 * @var \TectrolProducts\Tectrolproducts\Domain\Model\Targetgroups
+	 * @var \Df\Tectrolproducts\Domain\Model\Targetgroups
 	 */
 	protected $subject = NULL;
 
 	public function setUp()
 	{
-		$this->subject = new \TectrolProducts\Tectrolproducts\Domain\Model\Targetgroups();
+		$this->subject = new \Df\Tectrolproducts\Domain\Model\Targetgroups();
 	}
 
 	public function tearDown()

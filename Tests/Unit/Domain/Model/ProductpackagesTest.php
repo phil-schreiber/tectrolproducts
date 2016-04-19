@@ -1,6 +1,6 @@
 <?php
 
-namespace TectrolProducts\Tectrolproducts\Tests\Unit\Domain\Model;
+namespace Df\Tectrolproducts\Tests\Unit\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -27,7 +27,7 @@ namespace TectrolProducts\Tectrolproducts\Tests\Unit\Domain\Model;
  ***************************************************************/
 
 /**
- * Test case for class \TectrolProducts\Tectrolproducts\Domain\Model\Productpackages.
+ * Test case for class \Df\Tectrolproducts\Domain\Model\Productpackages.
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
@@ -36,13 +36,13 @@ namespace TectrolProducts\Tectrolproducts\Tests\Unit\Domain\Model;
 class ProductpackagesTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
 	/**
-	 * @var \TectrolProducts\Tectrolproducts\Domain\Model\Productpackages
+	 * @var \Df\Tectrolproducts\Domain\Model\Productpackages
 	 */
 	protected $subject = NULL;
 
 	public function setUp()
 	{
-		$this->subject = new \TectrolProducts\Tectrolproducts\Domain\Model\Productpackages();
+		$this->subject = new \Df\Tectrolproducts\Domain\Model\Productpackages();
 	}
 
 	public function tearDown()

@@ -28,18 +28,18 @@ namespace Df\Tectrolproducts\Controller;
  ***************************************************************/
 
 /**
- * ProductsController
+ * CategoriesController
  */
-class ProductsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class CategoriesController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
 
     /**
-     * productsRepository
+     * categoriesRepository
      * 
-     * @var \Df\Tectrolproducts\Domain\Repository\ProductsRepository
+     * @var \Df\Tectrolproducts\Domain\Repository\CategoriesRepository
      * @inject
      */
-    protected $productsRepository = NULL;
+    protected $categoriesRepository = NULL;
     
     /**
      * action list
@@ -48,22 +48,8 @@ class ProductsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      */
     public function listAction()
     {
-        
-        $products = $this->productsRepository->findAll();
-        
-        
-        $this->view->assign('productss', $products);
-    }
-    
-    /**
-     * action show
-     * 
-     * @param \Df\Tectrolproducts\Domain\Model\Products $products
-     * @return void
-     */
-    public function showAction(\Df\Tectrolproducts\Domain\Model\Products $products)
-    {
-        $this->view->assign('products', $products);
+        $categories = $this->categoriesRepository->findAll();
+        $this->view->assign('categories', $categories);
     }
 
 }
