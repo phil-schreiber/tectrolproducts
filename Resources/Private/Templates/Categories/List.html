@@ -13,37 +13,25 @@ in /Configuration/ExtensionBuilder/settings.yaml:
 Otherwise your changes will be overwritten the next time you save the extension in the extension builder
 
 <f:section name="main">
-<h1>Listing for Categories</h1>
+    <div id="left_col_content">
+        <ul class="tree treemenu" id="tectrol_subnavi">
+        <f:render section="categoryList" arguments="{categories: categories}" />
+        </ul>
+    </div>
+</f:section>
 
-<f:flashMessages />
 
-<table  class="tx_tectrolproducts" >
-	<tr>
-		<th><f:translate key="tx_tectrolproducts_domain_model_categories.title" /></th>
-		<th><f:translate key="tx_tectrolproducts_domain_model_categories.titleoverride" /></th>
-		<th><f:translate key="tx_tectrolproducts_domain_model_categories.description" /></th>
-		<th><f:translate key="tx_tectrolproducts_domain_model_categories.catimage" /></th>
-		<th><f:translate key="tx_tectrolproducts_domain_model_categories.parentid" /></th>
-		<th><f:translate key="tx_tectrolproducts_domain_model_categories.parentidoverride" /></th>
-		<th><f:translate key="tx_tectrolproducts_domain_model_categories.orderoverride" /></th>
-		<th> </th>
-		<th> </th>
-	</tr>
 
-	<f:for each="{categoriess}" as="categories">
-		<tr>
-			<td><f:link.action action="show" arguments="{categories : categories}"> {categories.title}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{categories : categories}"> {categories.titleoverride}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{categories : categories}"> {categories.description}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{categories : categories}"> {categories.catimage.originalResource.name}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{categories : categories}"> {categories.parentid}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{categories : categories}"> {categories.parentidoverride}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{categories : categories}"> {categories.orderoverride}</f:link.action></td>
-			<td><f:link.action action="edit" arguments="{categories : categories}">Edit</f:link.action></td>
-			<td><f:link.action action="delete" arguments="{categories : categories}">Delete</f:link.action></td>
-		</tr>
-	</f:for>
-</table>
-
-<f:link.action action="new">New Categories</f:link.action>
+<f:section name="categoryList">        
+		<f:for each="{categories}" as="category">
+                        <li><span class="toggler"></span>
+                            
+                                <span>{category.title}</span>
+				<f:if condition="isset({category[subcategories]})">
+                                    <ul class="sub_navi_lvl2_prod treemenu">
+					<f:render section="categoryList" arguments="{categories: category.subcategories}" />
+                                        </ul>
+				</f:if>
+			</li>
+		</f:for>	
 </f:section>

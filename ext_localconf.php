@@ -32,3 +32,18 @@ if (!defined('TYPO3_MODE')) {
 		
 	)
 );
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Df.' . $_EXTKEY,
+	'Catalogue',
+	array(
+		'Catalogue' => 'show',		
+		
+	),
+	// non-cacheable actions
+	array(
+		'Products' => '',
+		'Categories' => '',
+		
+	)
+);

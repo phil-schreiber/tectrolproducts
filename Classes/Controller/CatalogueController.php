@@ -28,31 +28,50 @@ namespace Df\Tectrolproducts\Controller;
  ***************************************************************/
 
 /**
- * CategoriesController
+ * CatalogueController
  */
-class CategoriesController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
-{
 
+class CatalogueController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+{
     /**
-     * categoriesRepository
-     * 
-     * @var \Df\Tectrolproducts\Domain\Repository\CategoriesRepository
-     * @inject
-     */
-    protected $categoriesRepository = NULL;
-    
+    * Categories repository
+    *
+    * @var \Df\Tectrolproducts\Domain\Repository\CategoriesRepository
+    * @inject
+    */
+    protected $categoriesRepository;
+
+   /**
+    * Products repository
+    *
+    * @var \Df\Tectrolproducts\Domain\Repository\ProductsRepository
+    * @inject
+    */
+    protected $productsRepository;
+ 
     /**
-     * action list
-     * 
+     * action show
+     *       
      * @return void
      */
-    public function listAction()
-    {
+    public function showAction()
+    {        
+        $this->view->assign('categories', $this->buildCategoryTree());
+         
+        $products = $this->productsRepository->findAll();
+        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($products);
+        $this->view->assign('productss', $products);
+    }
+    
+    private function buildCategoryTree(){
         $categories = $this->categoriesRepository->findAll();
+        
         $catArray=array();
         foreach($categories as $category){
-            if($category->getParentid()===0){
+            
+            if($category->getParentid()===0){                
                 $catArray[$category->getUid()]=array(
+                    
                     'title' => $category->getTitle(),
                     'uid' => $category->getUid()
                 );
@@ -64,7 +83,6 @@ class CategoriesController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
             }
         }
         
-        $this->view->assign('categories', $catArray);
+        return $catArray;
     }
-
 }

@@ -15,6 +15,12 @@ if (!defined('TYPO3_MODE')) {
 	'TECTROL Catfilter'
 );
 
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+	'Df.' . $_EXTKEY,
+	'Catalogue',
+	'TECTROL Catalogue'
+);
+
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'TECTROL Products');
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_tectrolproducts_domain_model_products', 'EXT:tectrolproducts/Resources/Private/Language/locallang_csh_tx_tectrolproducts_domain_model_products.xlf');
