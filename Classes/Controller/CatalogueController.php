@@ -55,34 +55,42 @@ class CatalogueController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
      * @return void
      */
     public function showAction()
-    {        
-        $this->view->assign('categories', $this->buildCategoryTree());
+    {   
+        $request = $this->request->getArguments();
+        
+        $activeid= isset($request['category']) ? $request['category']: 0;
+        
+        
+        $this->view->assign('categories', $this->buildCategoryTree($activeid));
          
         $products = $this->productsRepository->findAll();
-        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($products);
+        
         $this->view->assign('productss', $products);
     }
     
-    private function buildCategoryTree(){
+    private function buildCategoryTree($activeid){
         $categories = $this->categoriesRepository->findAll();
         
         $catArray=array();
         foreach($categories as $category){
             
-            if($category->getParentid()===0){                
+            if($category->getParentid()===0){                               
                 $catArray[$category->getUid()]=array(
                     
                     'title' => $category->getTitle(),
-                    'uid' => $category->getUid()
+                    'uid' => $category->getUid(),
+                    'active' => $activeid == $category->getUid() ? $category->getUid() : 0
+                        
                 );
             }else{
                 $catArray[$category->getParentid()]['subcategories'][$category->getUid()]=array(
                     'title' => $category->getTitle(),
-                    'uid' => $category->getUid()
+                    'uid' => $category->getUid(),
+                    'active' => $activeid === $category->getUid() ? $category->getUid() : 0
                 );
             }
         }
-        
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($catArray);
         return $catArray;
     }
 }

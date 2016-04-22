@@ -209,27 +209,30 @@ return array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:tectrolproducts/Resources/Private/Language/locallang_db.xlf:tx_tectrolproducts_domain_model_categories.parentid',
 			'config' => array(
-				'type' => 'input',
-				'size' => 4,
-				'eval' => 'int,required'
+				'type' => 'select',
+                                'renderMode' => 'tree',
+                                'renderType' => 'selectTree',
+                                'foreign_table' => 'tx_tectrolproducts_domain_model_categories',                                
+                                'treeConfig' => array(
+                                        'parentField' => 'parentid'
+                                ),
 			)
 		),
 		'parentidoverride' => array(
-			'exclude' => 1,
+			'exclude' => 0,
 			'label' => 'LLL:EXT:tectrolproducts/Resources/Private/Language/locallang_db.xlf:tx_tectrolproducts_domain_model_categories.parentidoverride',
 			'config' => array(
 				'type' => 'input',
-				'size' => 4,
-				'eval' => 'int,required'
+				'size' => 4                                
 			)
 		),
 		'orderoverride' => array(
-			'exclude' => 1,
+			'exclude' => 0,
 			'label' => 'LLL:EXT:tectrolproducts/Resources/Private/Language/locallang_db.xlf:tx_tectrolproducts_domain_model_categories.orderoverride',
 			'config' => array(
 				'type' => 'input',
-				'size' => 4,
-				'eval' => 'int,required'
+				'size' => 4
+				
 			)
 		),
 		

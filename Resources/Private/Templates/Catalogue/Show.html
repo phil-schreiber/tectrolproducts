@@ -32,15 +32,37 @@ Otherwise your changes will be overwritten the next time you save the extension 
     </div>   
     <f:section name="categoryList">        
         <f:for each="{categories}" as="category">
-                <li><span class="toggler"></span>
+            <f:if condition="isset({category[subcategories]})">
+                <f:then>
+                    <f:if condition="{category.active} != 0">
+                        <f:then>
+                            <li class="tree-open active">
+                        </f:then>
+                        <f:else>
+                            <li class="tree-closed">
+                        </f:else>                        
+                    </f:if>
+                            <span class="toggler"></span>
+
+                            <span><f:link.action action="show" arguments="{category:category.uid}">{category.title}</f:link.action></span>
+
+                                    <ul class="sub_navi_lvl2_prod treemenu">
+                                        <f:render section="categoryList" arguments="{categories: category.subcategories}" />
+                                    </ul>
+                        </li>
+                </f:then>
+                <f:else>
+                <li class="tree-closed"><span class="toggler"></span>
 
                         <span>{category.title}</span>
-                        <f:if condition="isset({category[subcategories]})">
+                        
                             <ul class="sub_navi_lvl2_prod treemenu">
                                 <f:render section="categoryList" arguments="{categories: category.subcategories}" />
                                 </ul>
-                        </f:if>
-                </li>
+                </li>    
+                </f:else>
+            </f:if>
+                
         </f:for>	
     </f:section>
 </f:section>
