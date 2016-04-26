@@ -33,5 +33,9 @@ namespace Df\Tectrolproducts\Domain\Repository;
 class ProductsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
 
-    
+    public function findByCategories($categories) {
+        $query = $this->createQuery();
+        $query->matching($query->in('category', $categories));
+        return $query->execute();
+    }
 }

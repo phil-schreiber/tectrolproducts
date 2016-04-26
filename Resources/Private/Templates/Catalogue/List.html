@@ -1,0 +1,105 @@
+{namespace m=TYPO3\Tectrolproducts\ViewHelpers}
+<f:layout name="Default" />
+
+This Template is responsible for displaying a single view for a domain object
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        Show.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+<f:flashMessages />
+    <div class="col-xs-12 col-sm-3" style="position:relative" id="left_column">                	                    
+        <div id="left_column_additional">
+            <f:render section="categories" arguments="{categories: categories}" />
+        </div>
+    </div>
+    <div id="main_column" class="col-xs-12 col-sm-9">
+            <f:if condition="{categoryactive} != 0">
+                <f:render section="catheader" arguments="{category: category}" />
+            </f:if>
+            
+            <f:render section="products" arguments="{productss: productss}" />
+    </div>
+</f:section>
+
+<f:section name="categories">    
+    <div id="left_col_content">
+        <ul class="tree" id="tectrol_subnavi">
+        <f:render section="categoryList" arguments="{categories: categories}" />
+        </ul>
+    </div>   
+    <f:section name="categoryList">        
+        <f:for each="{categories}" as="category">
+            <f:if condition="{category.subcategories}">
+                <f:then>
+                    <li {category.active}>
+                            
+
+                            <span><f:link.action action="list" arguments="{category:category.uid}">{category.title}</f:link.action></span>
+
+                                    <ul class="sub_navi_lvl2_prod">
+                                        <f:render section="categoryList" arguments="{categories: category.subcategories}" />
+                                    </ul>
+                        </li>
+                </f:then>
+                <f:else>
+                <li class="tree-closed">
+                        <span><f:link.action action="list" arguments="{category:category.uid}">{category.title}</f:link.action></span>
+                </li>    
+                </f:else>
+            </f:if>
+                
+        </f:for>	
+    </f:section>
+</f:section>
+
+<f:section name="catheader">
+    <div class="col-xs-12 col-sm-9">
+        	<h1 class="list_header">{category.title}</h1>
+                {category.description -> f:format.html()}
+            
+    </div>
+        
+        <div class="col-xs-12 col-sm-9 text-center">
+        
+<br>
+<img src="fileadmin/templates/img/divider.png" /><br>
+<br>
+<br>
+
+        </div>
+
+</f:section>
+
+<f:section name="products">
+    <div class="col-xs-12 col-sm-9">
+        <div class="productlist">
+            <f:if condition="{productss}">
+                <f:then>
+                <f:for each="{productss}" as="products">
+                    <div class="item">                                               
+                        <h1>{products.title}</h1>
+                        {products.description -> f:format.html()}
+                        <h3>Freigaben</h3>
+
+                        {products.freigaben -> f:format.html()}
+                        <div class="btn btn-primary"><f:link.action action="show" arguments="{product:products.uid,category:products.category}">{products.title}</f:link.action></div>
+                        <div class="listspacer"></div>
+
+
+                    </div>
+                </f:for>
+                </f:then>
+                <f:else>
+                    <p>Keine Produkte gefunden</p>
+                </f:else>
+            </f:if>
+        </div>
+    </div>
+</f:section>

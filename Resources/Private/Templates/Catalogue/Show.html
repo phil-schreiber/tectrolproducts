@@ -1,4 +1,4 @@
-
+{namespace m=TYPO3\Tectrolproducts\ViewHelpers}
 <f:layout name="Default" />
 
 This Template is responsible for displaying a single view for a domain object
@@ -20,45 +20,35 @@ Otherwise your changes will be overwritten the next time you save the extension 
         </div>
     </div>
     <div id="main_column" class="col-xs-12 col-sm-9">
-            <f:render section="products" arguments="{productss: productss}" />
+            
+            
+            <f:render section="product" arguments="{product: product}" />
     </div>
 </f:section>
 
 <f:section name="categories">    
     <div id="left_col_content">
-        <ul class="tree treemenu" id="tectrol_subnavi">
+        <ul class="tree" id="tectrol_subnavi">
         <f:render section="categoryList" arguments="{categories: categories}" />
         </ul>
     </div>   
     <f:section name="categoryList">        
         <f:for each="{categories}" as="category">
-            <f:if condition="isset({category[subcategories]})">
+            <f:if condition="{category.subcategories}">
                 <f:then>
-                    <f:if condition="{category.active} != 0">
-                        <f:then>
-                            <li class="tree-open active">
-                        </f:then>
-                        <f:else>
-                            <li class="tree-closed">
-                        </f:else>                        
-                    </f:if>
-                            <span class="toggler"></span>
+                    <li {category.active}>
+                            
 
-                            <span><f:link.action action="show" arguments="{category:category.uid}">{category.title}</f:link.action></span>
+                            <span><f:link.action action="list" arguments="{category:category.uid}">{category.title}</f:link.action></span>
 
-                                    <ul class="sub_navi_lvl2_prod treemenu">
+                                    <ul class="sub_navi_lvl2_prod">
                                         <f:render section="categoryList" arguments="{categories: category.subcategories}" />
                                     </ul>
                         </li>
                 </f:then>
                 <f:else>
-                <li class="tree-closed"><span class="toggler"></span>
-
-                        <span>{category.title}</span>
-                        
-                            <ul class="sub_navi_lvl2_prod treemenu">
-                                <f:render section="categoryList" arguments="{categories: category.subcategories}" />
-                                </ul>
+                <li class="tree-closed">
+                        <span><f:link.action action="list" arguments="{category:category.uid}">{category.title}</f:link.action></span>
                 </li>    
                 </f:else>
             </f:if>
@@ -68,33 +58,70 @@ Otherwise your changes will be overwritten the next time you save the extension 
 </f:section>
 
 
-
-<f:section name="products">
-    <div id="products" class="row list-group">
-        <f:for each="{productss}" as="products">
-            <div class="item  col-xs-4 col-lg-4">
-                    <div class="thumbnail">                            
-                            <f:if condition="{products.typeimage.originalResource.name}!=''">
-                                <f:then>
-                                    <img class="group list-group-image" src="{products.typeimage.originalResource.name}" alt="{products.title}">
-                                </f:then>
-                                <f:else>
-                                    <img class="group list-group-image" src="fileadmin/images/products/dummy.jpg" alt="{products.title}">
-                                </f:else>
-                            </f:if>                            
-                            <div class="caption">
-                            <h4 class="group inner list-group-item-heading">{products.title}</h4>
-                                    <p class="group inner list-group-item-text">{products.description}</p>
-
-                                    <div class="row">
-
-                                            <div class="col-xs-12 col-md-6">
-                                                    <a class="btn btn-success btn-block" href="http://www.bootstraptor.com">Details</a>
-                                            </div>
-                                    </div>
-                            </div>                             
-                    </div>                    
+<f:section name="product">
+    <div class="col-xs-12 col-sm-9">
+        <div class="productdetails">
+            	
+                <div class="item">
+                    <h1>{product.title}</h1>
+                    
+                	
+                    <div class="product_img_wrap">
+                    <f:image image="{productpackages.image}" alt="{product.typeimage.originalResource.title}" style="height:auto;"/>
+                    
+                    <div id="product_img_icon">
+                        <f:image image="{product.typeimage}" alt="{product.typeimage.originalResource.title}" style="height:auto;"/>
+                    </div>
+                    
+                    <div class="text-center">
+                    <div class="btn btn-primary productdetails shoplink">Jetzt online bestellen</div>
+                    </div>
+                  </div>
+                    {product.description -> f:format.html()}
+                    <h3>Freigaben</h3>
+                    <p class="freigaben">{product.freigaben -> f:format.html()}</p>
+                    
+                    <h3>Spezifikationen</h3>
+                    <p class="freigaben">{product.spezifikation -> f:format.html()}</p>
+                    
+                    
+                    <h3>Anwendungsempfehlungen</h3>
+                    <p>{product.anwendungsempfehlung -> f:format.html()}</p>
+                    
+                    
+                    <h3>Verfügbare Gebindegrößen</h3>
+                    <p>10 L, 50 L, 205 l</p>
+                    
+                    
+                    <h3>Downloads</h3>
+                    <ul>
+                      <li><a href="#">Produktinformationsblatt</a></li>
+                      <li><a href="#">Sicherheitsdatenblatt</a></li>
+                    </ul>
+                    
+                    
+                     
+                    
+                    
+                    <p>&nbsp;<br>
+<br>
+<br>                   
+                    </p>
+                    
+                    
+                    
+                    <div class="btn btn-primary">Zurück zur Übersicht</div>
+                    
+                    <div class="listspacer"></div>
+                    
+                    
+                </div>
+                
+                
+                
+                
+                
+            
             </div>
-        </f:for>
     </div>
 </f:section>

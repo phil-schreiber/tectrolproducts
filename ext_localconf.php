@@ -37,7 +37,7 @@ if (!defined('TYPO3_MODE')) {
 	'Df.' . $_EXTKEY,
 	'Catalogue',
 	array(
-		'Catalogue' => 'show',		
+		'Catalogue' => 'list,show',		
 		
 	),
 	// non-cacheable actions

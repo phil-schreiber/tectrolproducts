@@ -33,6 +33,9 @@ namespace Df\Tectrolproducts\Controller;
 
 class CatalogueController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
+    
+    private $parentids=array();
+    private $allsubs=array();
     /**
     * Categories repository
     *
@@ -54,43 +57,116 @@ class CatalogueController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
      *       
      * @return void
      */
-    public function showAction()
+    public function listAction()
     {   
-        $request = $this->request->getArguments();
+        $request = $this->request->getArguments();        
+        $activeCat= isset($request['category']) ? $request['category']: 0;
         
-        $activeid= isset($request['category']) ? $request['category']: 0;
+        $this->catTree($activeCat);
         
-        
-        $this->view->assign('categories', $this->buildCategoryTree($activeid));
-         
-        $products = $this->productsRepository->findAll();
-        
-        $this->view->assign('productss', $products);
+        $this->listProducts($activeCat);
+        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->parentids);                                
     }
     
-    private function buildCategoryTree($activeid){
-        $categories = $this->categoriesRepository->findAll();
+    public function showAction(){
+        $request = $this->request->getArguments();        
+        $activeCat= isset($request['category']) ? $request['category']: 0;
+        $product=isset($request['product']) ? $request['product']: 0;
+        $this->catTree($activeCat);
+        $this->showProduct($product);
+    }
         
-        $catArray=array();
+    
+    private function catTree($activeid){
+        if($activeid > 0){
+            $category = $this->categoriesRepository->findByUid($activeid);
+            $this->view->assign('category',$category);
+            
+        }
+        
+        $this->view->assign('categoryactive',$activeid);                
+        $this->view->assign('categories', $this->getCategories($activeid));
+    }
+    
+    private function listProducts($activecat){
+        $this->view->assign('productss', $this->getProducts($activecat));
+        
+    }
+    
+    private function showProduct($product){
+        $productObj=$this->productsRepository->findByUid($product);
+        $productpackages=$productObj->getPackages()->toArray();
+        $this->view->assign('product', $productObj);
+        $this->view->assign('productpackages', $productpackages[0]);
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($productpackages[0]);                                
+    }
+    
+    
+    private function getProducts($activeCat){
+        $products=NULL;
+        
+        if($activeCat > 0){            
+            $products=$this->productsRepository->findByCategories(array_key_exists($activeCat, $this->allSubs) ? $this->allSubs[$activeCat]:array($activeCat));
+        }else{            
+            $products=$this->productsRepository->findAll();
+        }
+        
+        return $products;
+    }
+    
+    private function getCategories($activeid){
+        $categories = $this->categoriesRepository->findAll();
+        $this->processTree($activeid,$categories);
+        
+        return $this->buildCategoryTree($activeid,$categories);
+    }
+    private function buildCategoryTree($activeid,$categories){                
+        $catArray=array();        
+        $allParentids=array();
         foreach($categories as $category){
+            
+            $allParentids[$category->getUid()]=$category->getParentid();
             
             if($category->getParentid()===0){                               
                 $catArray[$category->getUid()]=array(
                     
                     'title' => $category->getTitle(),
                     'uid' => $category->getUid(),
-                    'active' => $activeid == $category->getUid() ? $category->getUid() : 0
+                    'active' => array_key_exists($category->getUid(),array_flip($this->parentids)) ? 'class=active' : 'class=inactive'
                         
                 );
             }else{
                 $catArray[$category->getParentid()]['subcategories'][$category->getUid()]=array(
                     'title' => $category->getTitle(),
                     'uid' => $category->getUid(),
-                    'active' => $activeid === $category->getUid() ? $category->getUid() : 0
+                    'active' => array_key_exists($category->getUid(),array_flip($this->parentids)) ? 'class=active' : 'class=active'             
                 );
+                
+                
             }
         }
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($catArray);
+        
         return $catArray;
     }
+    
+    private function processTree($activeid,$categories){
+        $allParentids=array();
+        
+        foreach($categories as $category){
+            
+                $allParentids[$category->getUid()]=$category->getParentid();
+                $this->allSubs[intval($category->getParentid())][]=intval($category->getUid());
+        }
+        
+        $this->getAllParents($activeid,$allParentids);        
+    }    
+    
+    private function getAllParents($parentid,$allParentids){        
+        array_push($this->parentids,intval($parentid));
+        if(array_key_exists($parentid, $allParentids)){            
+            $this->getAllParents($allParentids[$parentid],$allParentids);
+        }                
+    }
+    
+    
 }
