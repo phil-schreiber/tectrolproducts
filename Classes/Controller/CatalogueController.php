@@ -65,7 +65,8 @@ class CatalogueController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
         $this->catTree($activeCat);
         
         $this->listProducts($activeCat);
-        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->parentids);                                
+        $GLOBALS['TSFE']->fe_user->setKey("ses","cat",$activeCat);
+        
     }
     
     public function showAction(){
@@ -95,10 +96,17 @@ class CatalogueController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
     
     private function showProduct($product){
         $productObj=$this->productsRepository->findByUid($product);
-        $productpackages=$productObj->getPackages()->toArray();
+        $productpackages=$productObj->getPackages();
         $this->view->assign('product', $productObj);
-        $this->view->assign('productpackages', $productpackages[0]);
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($productpackages[0]);                                
+        $this->view->assign('productpackages', $productpackages);
+        $firstpackage;
+        foreach($productpackages as $productpackage){
+            $firstpackage=$productpackage;    
+            break;
+        }
+        $this->view->assign('lastcat',$GLOBALS["TSFE"]->fe_user->getKey("ses","cat") ? $GLOBALS["TSFE"]->fe_user->getKey("ses","cat") : $productObj->getCategory());
+        $this->view->assign('productimage',$firstpackage);
+        
     }
     
     

@@ -19,14 +19,14 @@ return array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'searchFields' => 'title,description,viskovg,viskoj300,viskoj306,nlgi,anwendungsempfehlung,freigaben,spezifikation,typeimage,packages,category,targetgroups,',
+		'searchFields' => 'title,description,viskovg,viskoj300,viskoj306,nlgi,anwendungsempfehlung,freigaben,spezifikation,typeimage,packages,downloads,category,targetgroups,',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('tectrolproducts') . 'Resources/Public/Icons/tx_tectrolproducts_domain_model_products.gif'
 	),
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, viskovg, viskoj300, viskoj306, nlgi, anwendungsempfehlung, freigaben, spezifikation, typeimage, packages, category, targetgroups',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, viskovg, viskoj300, viskoj306, nlgi, anwendungsempfehlung, freigaben, spezifikation, typeimage, packages, downloads, category, targetgroups',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, description;;;richtext:rte_transform[mode=ts_links], viskovg, viskoj300, viskoj306, nlgi, anwendungsempfehlung;;;richtext:rte_transform[mode=ts_links], freigaben;;;richtext:rte_transform[mode=ts_links], spezifikation;;;richtext:rte_transform[mode=ts_links], typeimage, packages, category, targetgroups, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, description;;;richtext:rte_transform[mode=ts_links], viskovg, viskoj300, viskoj306, nlgi, anwendungsempfehlung;;;richtext:rte_transform[mode=ts_links], freigaben;;;richtext:rte_transform[mode=ts_links], spezifikation;;;richtext:rte_transform[mode=ts_links], typeimage, packages, downloads, category, targetgroups, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -316,6 +316,24 @@ return array(
 			'config' => array(
 				'type' => 'inline',
 				'foreign_table' => 'tx_tectrolproducts_domain_model_productpackages',
+				'foreign_field' => 'products',
+				'maxitems' => 9999,
+				'appearance' => array(
+					'collapseAll' => 0,
+					'levelLinksPosition' => 'top',
+					'showSynchronizationLink' => 1,
+					'showPossibleLocalizationRecords' => 1,
+					'showAllLocalizationLink' => 1
+				),
+			),
+
+		),
+                'downloads' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:tectrolproducts/Resources/Private/Language/locallang_db.xlf:tx_tectrolproducts_domain_model_products.downloads',
+			'config' => array(
+				'type' => 'inline',
+				'foreign_table' => 'tx_tectrolproducts_domain_model_productdownloads',
 				'foreign_field' => 'products',
 				'maxitems' => 9999,
 				'appearance' => array(

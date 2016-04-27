@@ -82,24 +82,29 @@ Otherwise your changes will be overwritten the next time you save the extension 
         <div class="productlist">
             <f:if condition="{productss}">
                 <f:then>
-                <f:for each="{productss}" as="products">
-                    <div class="item">                                               
-                        <h1>{products.title}</h1>
-                        {products.description -> f:format.html()}
-                        <h3>Freigaben</h3>
+                    <f:widget.paginate objects="{productss}" as="paginatedproducts" configuration="{itemsPerPage: 10, insertAbove: 1, insertBelow: 1, maximumNumberOfLinks: 10}">
+                        <f:for each="{paginatedproducts}" as="products">
+                            <div class="item">                                               
+                                <h1>{products.title}</h1>
+                                {products.description -> f:format.html()}
+                                <h3>Freigaben</h3>
 
-                        {products.freigaben -> f:format.html()}
-                        <div class="btn btn-primary"><f:link.action action="show" arguments="{product:products.uid,category:products.category}">{products.title}</f:link.action></div>
-                        <div class="listspacer"></div>
+                                {products.freigaben -> f:format.html()}
+                                <div class="btn btn-primary"><f:link.action action="show" arguments="{product:products.uid,category:products.category}">{products.title}</f:link.action></div>
+                                <div class="listspacer"></div>
 
 
-                    </div>
-                </f:for>
+                            </div>
+                        </f:for>
+                    </f:widget.paginate>
                 </f:then>
                 <f:else>
                     <p>Keine Produkte gefunden</p>
                 </f:else>
             </f:if>
         </div>
+        
+            
+            
     </div>
 </f:section>

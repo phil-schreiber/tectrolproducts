@@ -22,7 +22,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
     <div id="main_column" class="col-xs-12 col-sm-9">
             
             
-            <f:render section="product" arguments="{product: product}" />
+            <f:render section="product" arguments="{product: product,packages: productpackages,productimage: productimage,lastcat: lastcat}" />
     </div>
 </f:section>
 
@@ -67,16 +67,17 @@ Otherwise your changes will be overwritten the next time you save the extension 
                     
                 	
                     <div class="product_img_wrap">
-                    <f:image image="{productpackages.image}" alt="{product.typeimage.originalResource.title}" style="height:auto;"/>
+                        
+                        <f:image image="{productimage.image}" alt="{productimage.originalResource.title}" class="product_image"/>
                     
-                    <div id="product_img_icon">
-                        <f:image image="{product.typeimage}" alt="{product.typeimage.originalResource.title}" style="height:auto;"/>
-                    </div>
+                        <div id="product_img_icon">
+                            <f:image image="{product.typeimage}" alt="{product.typeimage.originalResource.title}" style="height:auto;"/>
+                        </div>
                     
-                    <div class="text-center">
-                    <div class="btn btn-primary productdetails shoplink">Jetzt online bestellen</div>
+                        <div class="text-center">
+                            <div class="btn btn-primary productdetails shoplink">Jetzt online bestellen</div>
+                        </div>
                     </div>
-                  </div>
                     {product.description -> f:format.html()}
                     <h3>Freigaben</h3>
                     <p class="freigaben">{product.freigaben -> f:format.html()}</p>
@@ -90,13 +91,18 @@ Otherwise your changes will be overwritten the next time you save the extension 
                     
                     
                     <h3>Verfügbare Gebindegrößen</h3>
-                    <p>10 L, 50 L, 205 l</p>
+                    <f:for each="{packages}" as="package" iteration="iterator">                                                
+                        <f:if condition="{iterator.index} > 0">,&nbsp;</f:if><span>{package.size}{package.unit}</span>                                                  
+                    </f:for>
                     
                     
                     <h3>Downloads</h3>
                     <ul>
-                      <li><a href="#">Produktinformationsblatt</a></li>
-                      <li><a href="#">Sicherheitsdatenblatt</a></li>
+                        <f:for each="{product.downloads}" as="download">
+                            <li>                                
+                                <f:link.page pageUid="{download.file.originalResource.publicUrl}" target="_blank"> {download.title} </f:link.page> 
+                            </li>
+                        </f:for>                                            
                     </ul>
                     
                     
@@ -110,7 +116,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
                     
                     
                     
-                    <div class="btn btn-primary">Zurück zur Übersicht</div>
+                    <div class="btn btn-primary"><f:link.action action="list" arguments="{category:lastcat}">Zurück zur Übersicht</f:link.action></div>
                     
                     <div class="listspacer"></div>
                     

@@ -36,6 +36,9 @@
 			<trans-unit id="packages.description">
 				<source>packages</source>
 			</trans-unit>
+                        <trans-unit id="downloads.description">
+				<source>downloads</source>
+			</trans-unit>
 			<trans-unit id="category.description">
 				<source>category</source>
 			</trans-unit>

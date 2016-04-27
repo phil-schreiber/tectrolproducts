@@ -114,6 +114,14 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $packages = null;
     
     /**
+     * downloads
+     * 
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Df\Tectrolproducts\Domain\Model\Productdownloads>
+     * @cascade remove
+     */
+    protected $downloads = null;
+    
+    /**
      * category
      * 
      * @var \Df\Tectrolproducts\Domain\Model\Categories
@@ -148,6 +156,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected function initStorageObjects()
     {
         $this->packages = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->downloads = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->targetgroups = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
     
@@ -402,6 +411,49 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setPackages(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $packages)
     {
         $this->packages = $packages;
+    }
+    
+    /**
+     * Adds a Downloads
+     * 
+     * @param \Df\Tectrolproducts\Domain\Model\Productdownloads $download
+     * @return void
+     */
+    public function addDownload(\Df\Tectrolproducts\Domain\Model\Productdownloads $download)
+    {
+        $this->downloads->attach($download);
+    }
+    
+    /**
+     * Removes a Productdownloads
+     * 
+     * @param \Df\Tectrolproducts\Domain\Model\Productdownloads $downloadToRemove The Productdownloads to be removed
+     * @return void
+     */
+    public function removeDownload(\Df\Tectrolproducts\Domain\Model\Productdownloads $downloadToRemove)
+    {
+        $this->downloads->detach($downloadToRemove);
+    }
+    
+    /**
+     * Returns the downloads
+     * 
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Df\Tectrolproducts\Domain\Model\Productdownloads> $downloads
+     */
+    public function getDownloads()
+    {
+        return $this->downloads;
+    }
+    
+    /**
+     * Sets the downloads
+     * 
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Df\Tectrolproducts\Domain\Model\Productdownloads> $downloads
+     * @return void
+     */
+    public function setDownloads(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $downloads)
+    {
+        $this->downloads = $downloads;
     }
     
     /**

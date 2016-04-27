@@ -39,6 +39,9 @@
 			<trans-unit id="tx_tectrolproducts_domain_model_products.packages">
 				<source>Packages</source>
 			</trans-unit>
+                        <trans-unit id="tx_tectrolproducts_domain_model_products.downloads">
+				<source>Downloads</source>
+			</trans-unit>
 			<trans-unit id="tx_tectrolproducts_domain_model_products.category">
 				<source>Category</source>
 			</trans-unit>
@@ -56,6 +59,15 @@
 			</trans-unit>
 			<trans-unit id="tx_tectrolproducts_domain_model_productpackages.image">
 				<source>Image</source>
+			</trans-unit>
+                        <trans-unit id="tx_tectrolproducts_domain_model_productdownloads">
+				<source>Productdownloads</source>
+			</trans-unit>			
+			<trans-unit id="tx_tectrolproducts_domain_model_productdownloads.title">
+				<source>Titel</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_productdownloads.file">
+				<source>File</source>
 			</trans-unit>
 			<trans-unit id="tx_tectrolproducts_domain_model_categories">
 				<source>Categories</source>

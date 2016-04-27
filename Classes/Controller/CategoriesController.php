@@ -32,7 +32,8 @@ namespace Df\Tectrolproducts\Controller;
  */
 class CategoriesController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
-
+private $parentids=array();
+    private $allsubs=array();
     /**
      * categoriesRepository
      * 
@@ -48,23 +49,73 @@ class CategoriesController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
      */
     public function listAction()
     {
+        $request = $this->request->getArguments();        
+        $activeCat= isset($request['category']) ? $request['category']: 0;        
+        $this->catTree($activeCat);
+        $this->view->assign('cataloguePid',$this->settings['cataloguePid']);
+    }
+    private function catTree($activeid){
+        if($activeid > 0){
+            $category = $this->categoriesRepository->findByUid($activeid);
+            $this->view->assign('category',$category);
+            
+        }
+        
+        $this->view->assign('categoryactive',$activeid);                
+        $this->view->assign('categories', $this->getCategories($activeid));
+    }
+    
+    private function getCategories($activeid){
         $categories = $this->categoriesRepository->findAll();
-        $catArray=array();
+        $this->processTree($activeid,$categories);
+        
+        return $this->buildCategoryTree($activeid,$categories);
+    }
+    private function buildCategoryTree($activeid,$categories){                
+        $catArray=array();        
+        $allParentids=array();
         foreach($categories as $category){
-            if($category->getParentid()===0){
+            
+            $allParentids[$category->getUid()]=$category->getParentid();
+            
+            if($category->getParentid()===0){                               
                 $catArray[$category->getUid()]=array(
+                    
                     'title' => $category->getTitle(),
-                    'uid' => $category->getUid()
+                    'uid' => $category->getUid(),
+                    'active' => array_key_exists($category->getUid(),array_flip($this->parentids)) ? 'class=active' : 'class=inactive'
+                        
                 );
             }else{
                 $catArray[$category->getParentid()]['subcategories'][$category->getUid()]=array(
                     'title' => $category->getTitle(),
-                    'uid' => $category->getUid()
+                    'uid' => $category->getUid(),
+                    'active' => array_key_exists($category->getUid(),array_flip($this->parentids)) ? 'class=active' : 'class=active'             
                 );
+                
+                
             }
         }
         
-        $this->view->assign('categories', $catArray);
+        return $catArray;
     }
-
+    
+    private function processTree($activeid,$categories){
+        $allParentids=array();
+        
+        foreach($categories as $category){
+            
+                $allParentids[$category->getUid()]=$category->getParentid();
+                $this->allSubs[intval($category->getParentid())][]=intval($category->getUid());
+        }
+        
+        $this->getAllParents($activeid,$allParentids);        
+    }    
+    
+    private function getAllParents($parentid,$allParentids){        
+        array_push($this->parentids,intval($parentid));
+        if(array_key_exists($parentid, $allParentids)){            
+            $this->getAllParents($allParentids[$parentid],$allParentids);
+        }                
+    }
 }

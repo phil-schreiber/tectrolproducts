@@ -1,5 +1,5 @@
 
-<f:layout name="Default" />
+<f:layout name="Menu" />
 
 This Template is responsible for creating a table of domain objects.
 
@@ -13,25 +13,42 @@ in /Configuration/ExtensionBuilder/settings.yaml:
 Otherwise your changes will be overwritten the next time you save the extension in the extension builder
 
 <f:section name="main">
-    <div id="left_col_content">
-        <ul class="tree treemenu" id="tectrol_subnavi">
-        <f:render section="categoryList" arguments="{categories: categories}" />
-        </ul>
-    </div>
+    
+        <li class="dropdown-short xs-hover"><f:link.page pageUid="{cataloguePid}">Produkte</f:link.page>
+        
+            <f:render section="categories" arguments="{categories: categories,cataloguePid:cataloguePid}" />
+        
+        </li>
+    
 </f:section>
 
 
 
-<f:section name="categoryList">        
-		<f:for each="{categories}" as="category">
-                        <li><span class="toggler"></span>
-                            
-                                <span>{category.title}</span>
-				<f:if condition="isset({category[subcategories]})">
-                                    <ul class="sub_navi_lvl2_prod treemenu">
-					<f:render section="categoryList" arguments="{categories: category.subcategories}" />
-                                        </ul>
-				</f:if>
-			</li>
-		</f:for>	
+<f:section name="categories">    
+    
+        <ul class="dropdown-menu">
+        <f:render section="categoryList" arguments="{categories: categories,cataloguePid:cataloguePid}" />
+        </ul>
+    
+    <f:section name="categoryList">        
+        <f:for each="{categories}" as="category">
+            <f:if condition="{category.subcategories}">
+                <f:then>
+                    <li class="dropdown-right-onhover" {category.active}>                            
+                            <f:link.action action="list" controller="Catalogue" arguments="{category:category.uid}" pageUid="{cataloguePid}" class="dropdown-toggle collapsed">{category.title}</f:link.action>
+
+                                    <ul class="dropdown-menu collapse">
+                                        <f:render section="categoryList" arguments="{categories: category.subcategories}" />
+                                    </ul>
+                        </li>
+                </f:then>
+                <f:else>
+                <li class="tree-closed">
+                        <span><f:link.action controller="Catalogue" pageUid="{cataloguePid}" action="list" arguments="{category:category.uid}">{category.title}</f:link.action></span>
+                </li>    
+                </f:else>
+            </f:if>
+                
+        </f:for>	
+    </f:section>
 </f:section>
