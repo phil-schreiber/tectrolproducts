@@ -20,6 +20,7 @@ CREATE TABLE tx_tectrolproducts_domain_model_products (
         downloads int(11) unsigned DEFAULT '0' NOT NULL,
 	category int(11) unsigned DEFAULT '0',
 	targetgroups int(11) unsigned DEFAULT '0' NOT NULL,
+        shoplink varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -45,6 +46,7 @@ CREATE TABLE tx_tectrolproducts_domain_model_products (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
+        KEY category (category),
 	KEY t3ver_oid (t3ver_oid,t3ver_wsid),
  KEY language (l10n_parent,sys_language_uid)
 
@@ -88,6 +90,7 @@ CREATE TABLE tx_tectrolproducts_domain_model_productpackages (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
+        KEY products (products),
 	KEY t3ver_oid (t3ver_oid,t3ver_wsid),
  KEY language (l10n_parent,sys_language_uid)
 
@@ -130,6 +133,7 @@ CREATE TABLE tx_tectrolproducts_domain_model_productdownloads (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
+        KEY products (products),
 	KEY t3ver_oid (t3ver_oid,t3ver_wsid),
  KEY language (l10n_parent,sys_language_uid)
 
@@ -175,6 +179,7 @@ CREATE TABLE tx_tectrolproducts_domain_model_categories (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
+        KEY parentid (parentid),
 	KEY t3ver_oid (t3ver_oid,t3ver_wsid),
  KEY language (l10n_parent,sys_language_uid)
 
@@ -221,20 +226,3 @@ CREATE TABLE tx_tectrolproducts_domain_model_targetgroups (
 
 );
 
-#
-# Table structure for table 'tx_tectrolproducts_domain_model_productpackages'
-#
-CREATE TABLE tx_tectrolproducts_domain_model_productpackages (
-
-	products  int(11) unsigned DEFAULT '0' NOT NULL,
-
-);
-
-#
-# Table structure for table 'tx_tectrolproducts_domain_model_targetgroups'
-#
-CREATE TABLE tx_tectrolproducts_domain_model_targetgroups (
-
-	products  int(11) unsigned DEFAULT '0' NOT NULL,
-
-);

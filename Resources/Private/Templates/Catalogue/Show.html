@@ -75,7 +75,8 @@ Otherwise your changes will be overwritten the next time you save the extension 
                         </div>
                     
                         <div class="text-center">
-                            <div class="btn btn-primary productdetails shoplink">Jetzt online bestellen</div>
+                            
+                            <div class="btn btn-primary productdetails shoplink"><f:link.external uri="{product.shoplink}" target="_blank"> Jetzt online bestellen</f:link.external></div>
                         </div>
                     </div>
                     {product.description -> f:format.html()}

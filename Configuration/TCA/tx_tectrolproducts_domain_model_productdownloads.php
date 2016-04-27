@@ -2,7 +2,7 @@
 return array(
 	'ctrl' => array(
 		'title'	=> 'LLL:EXT:tectrolproducts/Resources/Private/Language/locallang_db.xlf:tx_tectrolproducts_domain_model_productdownloads',
-		'label' => 'size',
+		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',

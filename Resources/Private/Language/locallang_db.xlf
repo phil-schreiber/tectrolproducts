@@ -48,6 +48,9 @@
 			<trans-unit id="tx_tectrolproducts_domain_model_products.targetgroups">
 				<source>Targetgroups</source>
 			</trans-unit>
+                        <trans-unit id="tx_tectrolproducts_domain_model_products.shoplink">
+				<source>Shoplink</source>
+			</trans-unit>
 			<trans-unit id="tx_tectrolproducts_domain_model_productpackages">
 				<source>Productpackages</source>
 			</trans-unit>

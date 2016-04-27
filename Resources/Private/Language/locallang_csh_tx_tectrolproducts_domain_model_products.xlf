@@ -45,6 +45,9 @@
 			<trans-unit id="targetgroups.description">
 				<source>targetgroups</source>
 			</trans-unit>
+                        <trans-unit id="targetgroups.shoplink">
+				<source>shoplink</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

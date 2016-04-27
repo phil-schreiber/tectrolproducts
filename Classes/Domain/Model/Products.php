@@ -146,6 +146,13 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
     
     /**
+     * shoplink
+     * 
+     * @var string
+     */
+    protected $shoplink = '';
+    
+    /**
      * Initializes all ObjectStorage properties
      * Do not modify this method!
      * It will be rewritten on each save in the extension builder
@@ -326,6 +333,27 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setFreigaben($freigaben)
     {
         $this->freigaben = $freigaben;
+    }
+    
+     /**
+     * Returns the shoplink
+     * 
+     * @return string $shoplink
+     */
+    public function getShoplink()
+    {
+        return $this->shoplink;
+    }
+    
+    /**
+     * Sets the shoplink
+     * 
+     * @param string $shoplink
+     * @return void
+     */
+    public function setShoplink($shoplink)
+    {
+        $this->shoplink = $shoplink;
     }
     
     /**
