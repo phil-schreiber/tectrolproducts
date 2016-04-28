@@ -13,3 +13,10 @@ plugin.tx_tectrolproducts_tectrolproducts {
 		storagePid =
 	}
 }
+module.tx_tectrolproducts_tectrolproducts {
+	
+	persistence {
+		
+		storagePid =
+	}
+}

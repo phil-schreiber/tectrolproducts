@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for module tectrolproducts import module - header, description</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="mlang_tabs_tab">Tectrolproducts Import</label>
+			<label index="mlang_labels_tabdescr">This module imports products to the tectroproducts extension.</label>
+			<label index="mlang_labels_tablabel">Produktimport.</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="mlang_tabs_tab">Tectrolproducts Import</label>
+			<label index="mlang_labels_tabdescr">Frischen Produktimport anstoßen.</label>
+			<label index="mlang_labels_tablabel">Produktimport.</label>
+		</languageKey>
+	</data>
+</T3locallang>
