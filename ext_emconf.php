@@ -13,7 +13,7 @@
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'TECTROL Products',
 	'description' => 'TECTROL product listing extension',
-	'category' => 'plugin',
+	'category' => 'module',
 	'author' => '',
 	'author_email' => '',
 	'state' => 'alpha',

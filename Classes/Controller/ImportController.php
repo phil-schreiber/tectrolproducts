@@ -33,13 +33,18 @@ namespace Df\Tectrolproducts\Controller;
 class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
     
-     // TypoScript settings
+    // TypoScript settings
     protected $settings = array();
+    
     // id of selected page
     protected $id;
+    
     // info of selected page
     protected $pageinfo;
+    
     private $categoryLookup=array();
+    
+    private $dataindex = array();
     
     /**
     * Categories repository
@@ -57,20 +62,10 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     */
     protected $productsRepository;
     
-    
-     protected function initializeAction() {
-        $this->id = (int)\TYPO3\CMS\Core\Utility\GeneralUtility::_GP('id');
-        $this->pageinfo = \TYPO3\CMS\Backend\Utility\BackendUtility::readPageAccess($this->id, $GLOBALS['BE_USER']->getPagePermsClause(1));
- 
-        $configurationManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Configuration\BackendConfigurationManager');
-        
-        $this->settings = $configurationManager->getConfiguration(
-            $this->request->getControllerExtensionName(),
-            $this->request->getPluginName()
-        );
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->settings);
-        
-    }
+    private $imagearray=array(
+      'A304493'   => 1
+    );
+     
  
     
     /**
@@ -85,12 +80,12 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             'importFile' => '../fileadmin/test.csv'
         );
         
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->persistence);
-        $categories=$this->categoriesRepository->findAll();
         
-        //$this->prepareTables();
-        //$this->buildCatLookup();
-        //$this->startImport();                 
+        
+        
+        $this->prepareTables();
+        $this->buildCatLookup();
+        $this->startImport();                 
     }
     
     private function prepareTables(){
@@ -106,7 +101,7 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $categories=$this->categoriesRepository->findAll();
         
         foreach($categories as $category){
-            $this->categoryLookup['title']=$category->uid;
+            $this->categoryLookup[$category->getTitle()]=$category;
         }
     }
     
@@ -114,10 +109,10 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
        
         if (($handle = fopen($this->setting['importFile'], "r")) !== FALSE) {
             $counter=0;
-            $dataIndex=array();
+            
             while($data = $this->getCsvWrapper($handle, 1000, ';')){
                 if($counter==0){
-                  $dataIndex=$data;
+                  $this->dataindex=$data;
                 }else{                        
                     $this->prepareProduct($data);
                 }                                         
@@ -127,26 +122,42 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     }
     
     private function prepareProduct($data){
-        if($product=$this->productsRepository->findOneByTitle($data[3])){
-            $package = new Df\Tectrolproducts\Domain\Model\Package();
-            $product->addPackage($package);
-            $this->productsRepository->update($product);                
+        $oldproduct=$this->productsRepository->findOneByTitle($data[array_search('Artikelbezeichnung lang',$this->dataindex)]);
+        if($oldproduct){
+            $package = new \Df\Tectrolproducts\Domain\Model\Productpackages();
+            $package->setSize($value=array_search('Gebindeinhalt',$this->dataindex) ? $data[$value] : '' );
+            $package->setUnit($value=array_search('Gebindeeinheit',$this->dataindex) ? $data[$value] : '' );
+            //$package->setImage(1);
+            $oldproduct->addPackage($package);
+            $this->productsRepository->update($oldproduct);                
         }else{
-            $product = new Df\Tectrolproducts\Domain\Model\Product();
-            $product->setTitle()
-                    ->setDescription()
-                    ->setViskovg()
-                    ->setViskoj300()
-                    ->setViskoj306()
-                    ->setNlgi()
-                    ->setAnwendungsempfehlung()
-                    ->setFreigaben()
-                    ->setShoplink()
-                    ->setSpezifikation()
-                    ->setTypeimage()
-                    ->setCategory();
-            $package = new Df\Tectrolproducts\Domain\Model\Package();
+        
+            $product = new \Df\Tectrolproducts\Domain\Model\Products();
+            $product->setTitle($data[array_search('Artikelbezeichnung lang',$this->dataindex)]);
+            $product->setDescription('');
+            $product->setViskovg($data[array_search('Viskosität ISO VG',$this->dataindex)]);
+            $product->setViskoj300($data[array_search('Viskosität J 300 (Motor)',$this->dataindex)]);
+            $product->setViskoj306($data[array_search('Viskosität J 306 (Getriebe)',$this->dataindex)]);
+            $product->setNlgi($data[array_search('NLGI Klasse',$this->dataindex)]);
+            $product->setAnwendungsempfehlung($data[array_search('Anwendungsempfehlung_PR',$this->dataindex)]);
+            $product->setFreigaben($data[array_search('Freigaben_PR',$this->dataindex)]);
+            $product->setShoplink($value=array_search('Tectrol.de',$this->dataindex) ? $data[$value] : '' );
+            $product->setSpezifikation($value=array_search('Spezifikation_PR',$this->dataindex) ? $data[$value] : '' );
+            //$product->setTypeimage(1);
+            //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->categoryLookup[$categoryName] );
+            $categoryName=$data[array_search('U-Ebene',$this->dataindex)]; 
+            if($this->categoryLookup[$categoryName]){ 
+                $product->setCategory($this->categoryLookup[$categoryName]);
+            }
+             
+            
+            $package = new \Df\Tectrolproducts\Domain\Model\Productpackages();
+            $package->setSize($value=array_search('Gebindeinhalt',$this->dataindex) ? $data[$value] : '' );
+            $package->setUnit($value=array_search('Gebindeeinheit',$this->dataindex) ? $data[$value] : '' );
+            //$package->setImage(1);
             $product->addPackage($package);
+            
+                    
             $this->productsRepository->add($product);
         }
     }
