@@ -48,8 +48,8 @@ plugin.tx_tectrolproducts._CSS_DEFAULT_STYLE (
 )
 
 
-module.tx_tectrolproducts_tectrolproducts {
+module.tx_tectrolproducts_tools_TectrolproductsTectrolproducts {
 	persistence {
-		storagePid = 0
-}
+		storagePid = 3
+		}
 }

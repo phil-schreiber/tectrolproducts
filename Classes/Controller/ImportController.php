@@ -40,6 +40,7 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     // info of selected page
     protected $pageinfo;
     private $categoryLookup=array();
+    
     /**
     * Categories repository
     *
@@ -57,7 +58,19 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     protected $productsRepository;
     
     
-     
+     protected function initializeAction() {
+        $this->id = (int)\TYPO3\CMS\Core\Utility\GeneralUtility::_GP('id');
+        $this->pageinfo = \TYPO3\CMS\Backend\Utility\BackendUtility::readPageAccess($this->id, $GLOBALS['BE_USER']->getPagePermsClause(1));
+ 
+        $configurationManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Configuration\BackendConfigurationManager');
+        
+        $this->settings = $configurationManager->getConfiguration(
+            $this->request->getControllerExtensionName(),
+            $this->request->getPluginName()
+        );
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->settings);
+        
+    }
  
     
     /**
@@ -71,9 +84,13 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             'storagePid' => 3,
             'importFile' => '../fileadmin/test.csv'
         );
-        $this->prepareTables();
-        $this->buildCatLookup();
-        $this->startImport();                 
+        
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->persistence);
+        $categories=$this->categoriesRepository->findAll();
+        
+        //$this->prepareTables();
+        //$this->buildCatLookup();
+        //$this->startImport();                 
     }
     
     private function prepareTables(){
@@ -126,7 +143,8 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
                     ->setFreigaben()
                     ->setShoplink()
                     ->setSpezifikation()
-                    ->setTypeimage();
+                    ->setTypeimage()
+                    ->setCategory();
             $package = new Df\Tectrolproducts\Domain\Model\Package();
             $product->addPackage($package);
             $this->productsRepository->add($product);
