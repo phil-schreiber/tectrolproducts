@@ -26,6 +26,9 @@ if (!defined('TYPO3_MODE')) {
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_tectrolproducts_domain_model_products', 'EXT:tectrolproducts/Resources/Private/Language/locallang_csh_tx_tectrolproducts_domain_model_products.xlf');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_tectrolproducts_domain_model_products');
 
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_tectrolproducts_domain_model_images', 'EXT:tectrolproducts/Resources/Private/Language/locallang_csh_tx_tectrolproducts_domain_model_images.xlf');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_tectrolproducts_domain_model_images');
+
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_tectrolproducts_domain_model_productpackages', 'EXT:tectrolproducts/Resources/Private/Language/locallang_csh_tx_tectrolproducts_domain_model_productpackages.xlf');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_tectrolproducts_domain_model_productpackages');
 

@@ -51,6 +51,15 @@
                         <trans-unit id="tx_tectrolproducts_domain_model_products.shoplink">
 				<source>Shoplink</source>
 			</trans-unit>
+                        <trans-unit id="tx_tectrolproducts_domain_model_images">
+				<source>Images</source>
+			</trans-unit>
+			<trans-unit id="tx_tectrolproducts_domain_model_images.title">
+				<source>Title</source>
+			</trans-unit>
+                        <trans-unit id="tx_tectrolproducts_domain_model_images.imagereference">
+				<source>Imagereference</source>
+			</trans-unit>
 			<trans-unit id="tx_tectrolproducts_domain_model_productpackages">
 				<source>Productpackages</source>
 			</trans-unit>

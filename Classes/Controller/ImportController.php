@@ -46,6 +46,10 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     
     private $dataindex = array();
     
+    private $oldproduct=array();        
+    
+    private $oldproductObjStore=array();        
+    
     /**
     * Categories repository
     *
@@ -62,11 +66,29 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     */
     protected $productsRepository;
     
-    private $imagearray=array(
-      'A304493'   => 1
-    );
-     
- 
+    /**
+    * Images repository
+    *
+    * @var \Df\Tectrolproducts\Domain\Repository\ImagesRepository
+    * @inject
+    */
+    protected $imagesRepository;
+    
+    /**
+    * Products dummyTypeImage
+    *
+    * @var \Df\Tectrolproducts\Domain\Model\Images
+    * @inject
+    */
+    private $dummyTypeImage;
+    
+    /**
+    * Products dummyImage
+    *
+    * @var \Df\Tectrolproducts\Domain\Model\Images
+    * @inject
+    */
+    private $dummyImage;
     
     /**
      * action create
@@ -85,6 +107,15 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         
         $this->prepareTables();
         $this->buildCatLookup();
+        
+        
+        
+        $dummyTP=$this->imagesRepository->findOneByTitle('dummyType');
+        $dummy=$this->imagesRepository->findOneByTitle('dummy');
+        
+        $this->dummyTypeImage='fileadmin/'.$dummyTP->getImagereference()->getOriginalResource()->getProperties()['identifier'];
+        $this->dummyImage='fileadmin/'.$dummy->getImagereference()->getOriginalResource()->getProperties()['identifier'];
+        
         $this->startImport();                 
     }
     
@@ -93,8 +124,7 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $GLOBALS['TYPO3_DB']->exec_TRUNCATEquery('tx_tectrolproducts_domain_model_productpackages'); 
         $GLOBALS['TYPO3_DB']->exec_TRUNCATEquery('tx_tectrolproducts_domain_model_productdownloads'); 
         	        
-        $this->productsRepository->removeAll();
-        
+        $this->productsRepository->removeAll();        
     }
     
     private function buildCatLookup(){
@@ -106,11 +136,12 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     }
     
     private function startImport(){
-       
+        
+        
         if (($handle = fopen($this->setting['importFile'], "r")) !== FALSE) {
             $counter=0;
             
-            while($data = $this->getCsvWrapper($handle, 1000, ';')){
+            while($data = $this->getCsvWrapper($handle, 1000, ';','"')){
                 if($counter==0){
                   $this->dataindex=$data;
                 }else{                        
@@ -118,20 +149,17 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
                 }                                         
                 $counter++;
             }
-        }                                                       
+        }
+        
     }
     
     private function prepareProduct($data){
-        $oldproduct=$this->productsRepository->findOneByTitle($data[array_search('Artikelbezeichnung lang',$this->dataindex)]);
-        if($oldproduct){
-            $package = new \Df\Tectrolproducts\Domain\Model\Productpackages();
-            $package->setSize($value=array_search('Gebindeinhalt',$this->dataindex) ? $data[$value] : '' );
-            $package->setUnit($value=array_search('Gebindeeinheit',$this->dataindex) ? $data[$value] : '' );
-            //$package->setImage(1);
-            $oldproduct->addPackage($package);
-            $this->productsRepository->update($oldproduct);                
-        }else{
         
+        
+        $oldInd=array_search(md5($data[array_search('Artikelbezeichnung lang',$this->dataindex)]),$this->oldproduct);            
+        
+        if($oldInd === FALSE){
+            $el=array_push($this->oldproduct,md5($data[array_search('Artikelbezeichnung lang',$this->dataindex)]));
             $product = new \Df\Tectrolproducts\Domain\Model\Products();
             $product->setTitle($data[array_search('Artikelbezeichnung lang',$this->dataindex)]);
             $product->setDescription('');
@@ -141,10 +169,18 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $product->setNlgi($data[array_search('NLGI Klasse',$this->dataindex)]);
             $product->setAnwendungsempfehlung($data[array_search('Anwendungsempfehlung_PR',$this->dataindex)]);
             $product->setFreigaben($data[array_search('Freigaben_PR',$this->dataindex)]);
-            $product->setShoplink($value=array_search('Tectrol.de',$this->dataindex) ? $data[$value] : '' );
-            $product->setSpezifikation($value=array_search('Spezifikation_PR',$this->dataindex) ? $data[$value] : '' );
-            //$product->setTypeimage(1);
-            //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->categoryLookup[$categoryName] );
+            $product->setShoplink($data[array_search('Tectrol.de',$this->dataindex)] );
+            $product->setSpezifikation($data[array_search('Spezifikation_PR',$this->dataindex)] );
+            $newImageReference =$this->objectManager->get('Df\\Tectrolproducts\\Domain\\Model\\FileReference');
+            
+            if($data[array_search('B - Grundoeltyp Asset Reference ID',$this->dataindex)] != '' && $tpImg=$this->imagesRepository->findOneByTitle($data[array_search('B - Grundoeltyp Asset Reference ID',$this->dataindex)] )){
+                $newImageReference->setFile($tpImg->getImagereference());                
+            }else{
+                $newImageReference->setFile($this->dummyImage);
+                
+            }
+            $product->setTypeimage($newDummyImageReference);
+            
             $categoryName=$data[array_search('U-Ebene',$this->dataindex)]; 
             if($this->categoryLookup[$categoryName]){ 
                 $product->setCategory($this->categoryLookup[$categoryName]);
@@ -152,13 +188,29 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
              
             
             $package = new \Df\Tectrolproducts\Domain\Model\Productpackages();
-            $package->setSize($value=array_search('Gebindeinhalt',$this->dataindex) ? $data[$value] : '' );
-            $package->setUnit($value=array_search('Gebindeeinheit',$this->dataindex) ? $data[$value] : '' );
-            //$package->setImage(1);
-            $product->addPackage($package);
-            
-                    
+            $package->setSize($data[array_search('Gebindeinhalt',$this->dataindex)]);
+            $package->setUnit($data[array_search('Gebindeeinheit',$this->dataindex)]);
+            $newTypeImageReference =$this->objectManager->get('Df\\Tectrolproducts\\Domain\\Model\\FileReference');
+            if($data[array_search('B - Primary Image Asset Reference ID',$this->dataindex)] != '' && $tpImg=$this->imagesRepository->findOneByTitle($data[array_search('B - Grundoeltyp Asset Reference ID',$this->dataindex)] )){
+                $newTypeImageReference->setFile($tpImg->getImagereference());
+                
+            }else{
+                $newTypeImageReference->setFile($this->dummyTypeImage);
+                
+            }
+            $package->setImage($newTypeImageReference);
+            $product->addPackage($package);                                
             $this->productsRepository->add($product);
+            $this->oldproductObjStore[$el-1]=$product;
+        }else{
+            $package = new \Df\Tectrolproducts\Domain\Model\Productpackages();                        
+            $package->setSize($data[array_search('Gebindeinhalt',$this->dataindex)]);
+            $package->setUnit($data[array_search('Gebindeeinheit',$this->dataindex)]);
+            //$package->setImage(1);
+            
+            $this->oldproductObjStore[$oldInd]->addPackage($package);
+            
+            //$this->productsRepository->update($this->oldproductObjStore[$oldInd]);                
         }
     }
     
@@ -170,5 +222,5 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 		}
 	}
     
-
+    
 }
