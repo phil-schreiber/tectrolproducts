@@ -91,6 +91,15 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     private $dummyImage;
     
     /**
+    * pesistenceManager - not neccessary since 6.2
+    *
+    * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
+    * @inject
+    */
+    protected $persistenceManager;
+    
+    
+    /**
      * action create
      * 
      * @return void
@@ -113,8 +122,10 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $dummyTP=$this->imagesRepository->findOneByTitle('dummyType');
         $dummy=$this->imagesRepository->findOneByTitle('dummy');
         
-        $this->dummyTypeImage='fileadmin/'.$dummyTP->getImagereference()->getOriginalResource()->getProperties()['identifier'];
-        $this->dummyImage='fileadmin/'.$dummy->getImagereference()->getOriginalResource()->getProperties()['identifier'];
+        //$this->dummyTypeImage=$dummyTP->getImagereference()->getOriginalResource()->getOriginalFile();
+        //$this->dummyImage=$dummy->getImagereference()->getOriginalResource()->getOriginalFile();
+        $this->dummyTypeImage=$dummyTP->getImagereference();
+        $this->dummyImage=$dummy->getImagereference();
         
         $this->startImport();                 
     }
@@ -171,15 +182,17 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $product->setFreigaben($data[array_search('Freigaben_PR',$this->dataindex)]);
             $product->setShoplink($data[array_search('Tectrol.de',$this->dataindex)] );
             $product->setSpezifikation($data[array_search('Spezifikation_PR',$this->dataindex)] );
-            $newImageReference =$this->objectManager->get('Df\\Tectrolproducts\\Domain\\Model\\FileReference');
+            
             
             if($data[array_search('B - Grundoeltyp Asset Reference ID',$this->dataindex)] != '' && $tpImg=$this->imagesRepository->findOneByTitle($data[array_search('B - Grundoeltyp Asset Reference ID',$this->dataindex)] )){
-                $newImageReference->setFile($tpImg->getImagereference());                
+                $product->setTypeimage($tpImg->getImagereference());
+                
             }else{
-                $newImageReference->setFile($this->dummyImage);
+                $product->setTypeimage($this->dummyTypeImage);
+                
                 
             }
-            $product->setTypeimage($newDummyImageReference);
+            
             
             $categoryName=$data[array_search('U-Ebene',$this->dataindex)]; 
             if($this->categoryLookup[$categoryName]){ 
@@ -190,15 +203,14 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $package = new \Df\Tectrolproducts\Domain\Model\Productpackages();
             $package->setSize($data[array_search('Gebindeinhalt',$this->dataindex)]);
             $package->setUnit($data[array_search('Gebindeeinheit',$this->dataindex)]);
-            $newTypeImageReference =$this->objectManager->get('Df\\Tectrolproducts\\Domain\\Model\\FileReference');
+            
             if($data[array_search('B - Primary Image Asset Reference ID',$this->dataindex)] != '' && $tpImg=$this->imagesRepository->findOneByTitle($data[array_search('B - Grundoeltyp Asset Reference ID',$this->dataindex)] )){
-                $newTypeImageReference->setFile($tpImg->getImagereference());
-                
+                $package->setImage($tpImg->getImagereference());
             }else{
-                $newTypeImageReference->setFile($this->dummyTypeImage);
                 
+                $package->setImage($this->dummyImage);
             }
-            $package->setImage($newTypeImageReference);
+            
             $product->addPackage($package);                                
             $this->productsRepository->add($product);
             $this->oldproductObjStore[$el-1]=$product;

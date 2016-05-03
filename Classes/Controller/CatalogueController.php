@@ -104,6 +104,7 @@ class CatalogueController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
             $firstpackage=$productpackage;    
             break;
         }
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($productObj->getTypeimage());
         $this->view->assign('lastcat',$GLOBALS["TSFE"]->fe_user->getKey("ses","cat") ? $GLOBALS["TSFE"]->fe_user->getKey("ses","cat") : $productObj->getCategory());
         $this->view->assign('productimage',$firstpackage);
         

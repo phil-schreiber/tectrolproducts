@@ -140,43 +140,14 @@ return array(
 			'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
 				'image',
 				array(
-					'appearance' => array(
-						'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:media.addFileReference'
-					),
-					'foreign_types' => array(
-						'0' => array(
-							'showitem' => '
-							--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-							--palette--;;filePalette'
-						),
-						\TYPO3\CMS\Core\Resource\File::FILETYPE_TEXT => array(
-							'showitem' => '
-							--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-							--palette--;;filePalette'
-						),
-						\TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => array(
-							'showitem' => '
-							--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-							--palette--;;filePalette'
-						),
-						\TYPO3\CMS\Core\Resource\File::FILETYPE_AUDIO => array(
-							'showitem' => '
-							--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-							--palette--;;filePalette'
-						),
-						\TYPO3\CMS\Core\Resource\File::FILETYPE_VIDEO => array(
-							'showitem' => '
-							--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-							--palette--;;filePalette'
-						),
-						\TYPO3\CMS\Core\Resource\File::FILETYPE_APPLICATION => array(
-							'showitem' => '
-							--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-							--palette--;;filePalette'
-						)
-					),
-					'maxitems' => 1
-				)
+			'maxitems' => 1,
+			'foreign_match_fields' => array(
+				'fieldname' => 'image',
+				'tablenames' => 'tx_tectrolproducts_domain_model_productpackages',
+				'table_local' => 'sys_file',
+			),
+		),
+		$GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
 			),
 		),
 		
