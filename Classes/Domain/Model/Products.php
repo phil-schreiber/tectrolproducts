@@ -101,9 +101,9 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * typeimage
      * 
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+     * @var string
      */
-    protected $typeimage = null;
+    protected $typeimage = '';
     
     /**
      * packages
@@ -380,7 +380,7 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the typeimage
      * 
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $typeimage
+     * @return string $typeimage
      */
     public function getTypeimage()
     {
@@ -390,10 +390,10 @@ class Products extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the typeimage
      * 
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $typeimage
+     * @param string $typeimage
      * @return void
      */
-    public function setTypeimage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $typeimage)
+    public function setTypeimage($typeimage)
     {
         $this->typeimage = $typeimage;
     }

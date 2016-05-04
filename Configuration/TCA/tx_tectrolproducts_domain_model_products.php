@@ -268,18 +268,12 @@ return array(
 		'typeimage' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:tectrolproducts/Resources/Private/Language/locallang_db.xlf:tx_tectrolproducts_domain_model_products.typeimage',
-			'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-				'typeimage',
-				array(
-			'maxitems' => 1,
-			'foreign_match_fields' => array(
-				'fieldname' => 'image',
-				'tablenames' => 'tx_tectrolproducts_domain_model_products',
-				'table_local' => 'sys_file',
-			),
-		),
-		$GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-			),
+			'config' => array(
+				'type' => 'input',
+				'size' => 30,
+				'eval' => 'trim'
+			)
+				
 		),
 		'packages' => array(
 			'exclude' => 1,

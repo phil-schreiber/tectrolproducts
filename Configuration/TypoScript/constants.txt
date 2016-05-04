@@ -28,19 +28,6 @@ module.tx_tectrolproducts_tectrolproducts {
 	persistence {
 		# cat=module.tx_tectrolproducts_tectrolproducts//a; type=string; label=Default storage PID
 		storagePid = 3
-                classes {
-			Df\Tectrolproducts\Domain\Model\FileReference {
-				mapping {
-					tableName = sys_file_reference
-					columns {
-						uid_local.mapOnProperty = originalFileIdentifier
-					}
-				}
-			}
-		}
-		objects {
-			TYPO3\CMS\Extbase\Domain\Model\FileReference.className = Df\Tectrolproducts\Domain\Model\FileReference
-		}
-		updateReferenceIndex = 1
+                
 	}
 }

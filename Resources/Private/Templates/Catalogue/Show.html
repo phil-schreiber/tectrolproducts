@@ -68,11 +68,11 @@ Otherwise your changes will be overwritten the next time you save the extension 
                 	
                     <div class="product_img_wrap">
                         
-                        {productimage.image.originalResource.properties}
-                        <f:image image="{productimage.image}" alt="{productimage.image.originalResource.title}" treatIdAsReference="1"  class="product_image"/>
+                        
+                        <f:image src="{productimage.image}" alt=""   class="product_image"/>
                     
                         <div id="product_img_icon">
-                            <f:image image="{product.typeimage}" alt="{product.typeimage.originalResource.title}"  style="height:auto;"/>
+                            <f:image src="{product.typeimage}" alt="{product.title}"  style="height:auto;"/>
                         </div>
                     
                         <div class="text-center">

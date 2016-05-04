@@ -122,11 +122,10 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $dummyTP=$this->imagesRepository->findOneByTitle('dummyType');
         $dummy=$this->imagesRepository->findOneByTitle('dummy');
         
-        //$this->dummyTypeImage=$dummyTP->getImagereference()->getOriginalResource()->getOriginalFile();
-        //$this->dummyImage=$dummy->getImagereference()->getOriginalResource()->getOriginalFile();
-        $this->dummyTypeImage=$dummyTP->getImagereference();
-        $this->dummyImage=$dummy->getImagereference();
+        $this->dummyTypeImage=$dummyTP->getImagereference()->getOriginalResource();
+        $this->dummyImage=$dummy->getImagereference()->getOriginalResource();
         
+        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->dummyImage);
         $this->startImport();                 
     }
     
@@ -181,14 +180,13 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $product->setAnwendungsempfehlung($data[array_search('Anwendungsempfehlung_PR',$this->dataindex)]);
             $product->setFreigaben($data[array_search('Freigaben_PR',$this->dataindex)]);
             $product->setShoplink($data[array_search('Tectrol.de',$this->dataindex)] );
-            $product->setSpezifikation($data[array_search('Spezifikation_PR',$this->dataindex)] );
-            
+            $product->setSpezifikation($data[array_search('Spezifikation_PR',$this->dataindex)] );            
             
             if($data[array_search('B - Grundoeltyp Asset Reference ID',$this->dataindex)] != '' && $tpImg=$this->imagesRepository->findOneByTitle($data[array_search('B - Grundoeltyp Asset Reference ID',$this->dataindex)] )){
-                $product->setTypeimage($tpImg->getImagereference());
+                $product->setTypeimage($this->addImage($tpImg->getImagereference()));
                 
             }else{
-                $product->setTypeimage($this->dummyTypeImage);
+                $product->setTypeimage($this->addImage($this->dummyTypeImage));
                 
                 
             }
@@ -205,10 +203,10 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $package->setUnit($data[array_search('Gebindeeinheit',$this->dataindex)]);
             
             if($data[array_search('B - Primary Image Asset Reference ID',$this->dataindex)] != '' && $tpImg=$this->imagesRepository->findOneByTitle($data[array_search('B - Grundoeltyp Asset Reference ID',$this->dataindex)] )){
-                $package->setImage($tpImg->getImagereference());
+                $package->setImage($this->addImage($tpImg->getImagereference()));
             }else{
                 
-                $package->setImage($this->dummyImage);
+                $package->setImage($this->addImage($this->dummyImage));
             }
             
             $product->addPackage($package);                                
@@ -218,6 +216,12 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $package = new \Df\Tectrolproducts\Domain\Model\Productpackages();                        
             $package->setSize($data[array_search('Gebindeinhalt',$this->dataindex)]);
             $package->setUnit($data[array_search('Gebindeeinheit',$this->dataindex)]);
+            if($data[array_search('B - Primary Image Asset Reference ID',$this->dataindex)] != '' && $tpImg=$this->imagesRepository->findOneByTitle($data[array_search('B - Grundoeltyp Asset Reference ID',$this->dataindex)] )){
+                $package->setImage($this->addImage($tpImg->getImagereference()));
+            }else{
+                
+                $package->setImage($this->addImage($this->dummyImage));
+            }
             //$package->setImage(1);
             
             $this->oldproductObjStore[$oldInd]->addPackage($package);
@@ -234,5 +238,16 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 		}
 	}
     
+     /**
+     * Action addImage
+     *
+     * @param \TYPO3\CMS\Core\Resource\FileReference $originalFile
+     * @return string
+     */
+    public function addImage(\TYPO3\CMS\Core\Resource\FileReference $originalFile) {                   
+        return 'fileadmin'.$originalFile->getOriginalFile()->getIdentifier();
+
+    }
+
     
 }

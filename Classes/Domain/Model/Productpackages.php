@@ -51,9 +51,9 @@ class Productpackages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * image
      * 
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+     * @var string
      */
-    protected $image = null;
+    protected $image = '';
     
     /**
      * Returns the size
@@ -100,7 +100,7 @@ class Productpackages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the image
      * 
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
+     * @return string $image
      */
     public function getImage()
     {
@@ -110,10 +110,10 @@ class Productpackages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the image
      * 
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
+     * @param string $image
      * @return void
      */
-    public function setImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
+    public function setImage($image)
     {
         $this->image = $image;
     }
