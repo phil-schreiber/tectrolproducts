@@ -110,7 +110,7 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             'storagePid' => 3,
             'importFile' => '../fileadmin/test.csv'
         );
-        
+      
         
         
         
@@ -125,7 +125,7 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $this->dummyTypeImage=$dummyTP->getImagereference()->getOriginalResource();
         $this->dummyImage=$dummy->getImagereference()->getOriginalResource();
         
-        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->dummyImage);
+        
         $this->startImport();                 
     }
     
@@ -139,8 +139,9 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     
     private function buildCatLookup(){
         $categories=$this->categoriesRepository->findAll();
-        
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($categories);
         foreach($categories as $category){
+            
             $this->categoryLookup[$category->getTitle()]=$category;
         }
     }
