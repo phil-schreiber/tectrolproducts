@@ -10,7 +10,7 @@ plugin.tx_tectrolproducts_tectrolproducts {
 	}
 	persistence {
 		# cat=plugin.tx_tectrolproducts_tectrolproducts//a; type=string; label=Default storage PID
-		storagePid =
+		storagePid = 3
 	}
 }
 
