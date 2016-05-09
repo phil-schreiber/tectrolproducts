@@ -38,7 +38,7 @@ class Productpackages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * 
      * @var string
      */
-    protected $size = 0.0;
+    protected $size = '';
     
     /**
      * unit

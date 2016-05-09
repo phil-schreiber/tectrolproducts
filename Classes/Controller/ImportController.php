@@ -213,7 +213,7 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             
             $package = new \Df\Tectrolproducts\Domain\Model\Productpackages();
             $rawSize=$data[array_search('Gebindeinhalt',$this->dataindex)];
-            $size=  preg_replace('/<gt/>/', '>', $rawSize);
+            $size=  preg_replace('/<gt\/>/', '>', $rawSize);
             $package->setSize($size);
             $package->setUnit($data[array_search('Gebindeeinheit',$this->dataindex)]);
             
@@ -230,7 +230,7 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         }else{
             $package = new \Df\Tectrolproducts\Domain\Model\Productpackages();                        
             $rawSize=$data[array_search('Gebindeinhalt',$this->dataindex)];
-            $size=  preg_replace('/<gt/>/', '>', $rawSize);
+            $size=  preg_replace('/<gt\/>/', '>', $rawSize);
             $package->setSize($size);
             
             $package->setUnit($data[array_search('Gebindeeinheit',$this->dataindex)]);

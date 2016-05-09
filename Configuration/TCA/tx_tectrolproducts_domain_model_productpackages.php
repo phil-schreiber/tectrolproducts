@@ -122,7 +122,7 @@ return array(
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
-				'eval' => 'double2,required'
+				'eval' => 'trim'
 			)
 		),
 		'unit' => array(
