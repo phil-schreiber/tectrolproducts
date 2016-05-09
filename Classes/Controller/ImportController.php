@@ -105,28 +105,40 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * @return void
      */
     public function createAction()
-    {        	        
-        $this->setting=array(
-            'storagePid' => 3,
-            'importFile' => '../../../www/baywa/tectrol/cms/fileadmin/test.csv'
-        );
+    {   
+         if($this->request->hasArgument('submit')) {
+            $file=PATH_site.'fileadmin/data_'.time().'.csv';
+            $uploadedFile=$_FILES['tx_tectrolproducts_tools_tectrolproductstectrolproducts']['tmp_name']['import']['file'];
+            move_uploaded_file($uploadedFile, $file);
+             
+            $this->setting=array(            
+            'importFile' => $file
+            ); 
+             
+            
+            
+            $this->prepareTables();
+            $this->buildCatLookup();
+
+            $dummyTP=$this->imagesRepository->findOneByTitle('dummyType');
+            $dummy=$this->imagesRepository->findOneByTitle('dummy');
+
+            $this->dummyTypeImage=$dummyTP->getImagereference()->getOriginalResource();
+            $this->dummyImage=$dummy->getImagereference()->getOriginalResource();
+
+
+            if($this->startImport()){             
+                echo('done');
+                unlink($file);
+            }
+         }
+        
+        
       
         
         
         
-        $this->prepareTables();
-        $this->buildCatLookup();
-        
-        
-        
-        $dummyTP=$this->imagesRepository->findOneByTitle('dummyType');
-        $dummy=$this->imagesRepository->findOneByTitle('dummy');
-        
-        $this->dummyTypeImage=$dummyTP->getImagereference()->getOriginalResource();
-        $this->dummyImage=$dummy->getImagereference()->getOriginalResource();
-        
-        
-        $this->startImport();                 
+                       
     }
     
     private function prepareTables(){
@@ -161,7 +173,7 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
                 $counter++;
             }
         }
-        
+        return true;
     }
     
     private function prepareProduct($data){
@@ -200,7 +212,9 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
              
             
             $package = new \Df\Tectrolproducts\Domain\Model\Productpackages();
-            $package->setSize($data[array_search('Gebindeinhalt',$this->dataindex)]);
+            $rawSize=$data[array_search('Gebindeinhalt',$this->dataindex)];
+            $size=  preg_replace('/<gt/>/', '>', $rawSize);
+            $package->setSize($size);
             $package->setUnit($data[array_search('Gebindeeinheit',$this->dataindex)]);
             
             if($data[array_search('B - Primary Image Asset Reference ID',$this->dataindex)] != '' && $tpImg=$this->imagesRepository->findOneByTitle($data[array_search('B - Grundoeltyp Asset Reference ID',$this->dataindex)] )){
@@ -215,7 +229,10 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $this->oldproductObjStore[$el-1]=$product;
         }else{
             $package = new \Df\Tectrolproducts\Domain\Model\Productpackages();                        
-            $package->setSize($data[array_search('Gebindeinhalt',$this->dataindex)]);
+            $rawSize=$data[array_search('Gebindeinhalt',$this->dataindex)];
+            $size=  preg_replace('/<gt/>/', '>', $rawSize);
+            $package->setSize($size);
+            
             $package->setUnit($data[array_search('Gebindeeinheit',$this->dataindex)]);
             if($data[array_search('B - Primary Image Asset Reference ID',$this->dataindex)] != '' && $tpImg=$this->imagesRepository->findOneByTitle($data[array_search('B - Grundoeltyp Asset Reference ID',$this->dataindex)] )){
                 $package->setImage($this->addImage($tpImg->getImagereference()));

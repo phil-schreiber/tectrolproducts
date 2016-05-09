@@ -36,8 +36,7 @@ class Productpackages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * size
      * 
-     * @var float
-     * @validate NotEmpty
+     * @var string
      */
     protected $size = 0.0;
     
@@ -58,7 +57,7 @@ class Productpackages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the size
      * 
-     * @return float $size
+     * @return string $size
      */
     public function getSize()
     {
@@ -68,7 +67,7 @@ class Productpackages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the size
      * 
-     * @param float $size
+     * @param string $size
      * @return void
      */
     public function setSize($size)

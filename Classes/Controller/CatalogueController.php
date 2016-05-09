@@ -75,6 +75,7 @@ class CatalogueController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
         $product=isset($request['product']) ? $request['product']: 0;
         $this->catTree($activeCat);
         $this->showProduct($product);
+        
     }
         
     
@@ -98,6 +99,7 @@ class CatalogueController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
         $productObj=$this->productsRepository->findByUid($product);
         $productpackages=$productObj->getPackages();
         $this->view->assign('product', $productObj);
+        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($productpackages);
         $this->view->assign('productpackages', $productpackages);
         $firstpackage;
         foreach($productpackages as $productpackage){
